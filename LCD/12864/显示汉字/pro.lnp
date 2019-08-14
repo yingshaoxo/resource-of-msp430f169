@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"lcd12864.obj",
+"main.obj" 
+TO "pro" 

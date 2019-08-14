@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://www.voidcn.com/article/p-eablzuon-tv.html -->
+<html class="gr__voidcn_com" style="zoom: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/analytics.js"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSP430 Launchpad串行/并行12864显示 - 程序园</title>
+    <meta name="keywords" content="msp430,msp,430,launchpad,串行,并行,12864,显示">
+    <meta name="description" content="#include " msp430g2553.h"="" #define="" uint="" unsigned="" int="" uchar="" char="" *****************************************="" rs---&gt;&gt;p2.0="" rw---&gt;&gt;p2.1="" e----&gt;&gt;p2.2="" psb--&gt;&gt;p2.3="" pause&gt;&gt;p2."="">
+    <meta name="google-site-verification" content="eVo932LL8QghamZXYXdbvMxZcdr2v6nNXj2f7mfA1cw">
+    
+    <link rel="shortcut icon" href="http://static02.voidcn.com/voidcn/favicon.ico" type="image/x-icon">
+    <link href="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/pub.min.css" rel="stylesheet">
+    <link href="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/application.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/font-awesome.css" rel="stylesheet">
+    
+    <script src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/hm.js"></script><script src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/pub.js" type="text/javascript"></script>
+    <script src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/application.js" type="text/javascript"></script>
+    
+<script src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/share.js"></script><link href="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/share.css" rel="styleSheet" type="text/css"></head>
+
+<body class="  pace-done" data-gr-c-s-loaded="true"><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+
+<div id="header" class="navbar-fixed-top">
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a href="http://www.voidcn.com/" class="brand">程序园</a>
+                <nav class="nav-collapse collapse">
+                    <ul class="nav navbar primary-nav">
+                        <li class="">
+                            <a href="http://www.voidcn.com/column">栏目</a>
+                        </li>
+                        <li class="">
+                            <a href="http://www.voidcn.com/tag">标签</a>
+                        </li>
+                        <li class="">
+                            <a href="http://www.voidcn.com/cata">分类</a>
+                        </li>
+                        <li class="">
+                            <a href="http://www.voidcn.com/course">教程</a>
+                        </li>
+                        <li class="">
+                            <a href="http://www.voidcn.com/code">代码</a>
+                        </li>
+                    </ul>
+                    <form class="navbar-search pull-left" action="http://www.voidcn.com/gsearch">
+						<input type="text" class="search-query span2" name="q" placeholder="搜索">
+					</form>
+                    <ul class="nav pull-right">
+                        <li><a href="javascript:void()"></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div><link href="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/share(1).css" rel="stylesheet">
+<link href="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/fontello.css" rel="stylesheet">
+
+<div class="container-fluid">
+	<div class="row-fluid article_row_fluid">
+
+<div class="span9 contant article_detail_bg">
+
+	<h1>MSP430 Launchpad串行/并行12864显示</h1>
+	
+    <div class="article_meta">
+        <div style="margin-bottom: 2px;">
+    		<span class="timestamp">时间&nbsp;&nbsp;2013-06-26</span>
+        </div>
+
+			<div style="margin-bottom: 2px;">
+		            <span>标签</span>
+						<a target="_blank" href="http://www.voidcn.com/tag/MSP430" title="MSP430"> <span class="new-label">MSP430</span></a>
+						<a target="_blank" href="http://www.voidcn.com/tag/Launchpad" title="Launchpad"> <span class="new-label">Launchpad</span></a>
+						<a target="_blank" href="http://www.voidcn.com/tag/%E4%B8%B2%E8%A1%8C" title="串行"> <span class="new-label">串行</span></a>
+						<a target="_blank" href="http://www.voidcn.com/tag/%E5%B9%B6%E8%A1%8C" title="并行"> <span class="new-label">并行</span></a>
+						<a target="_blank" href="http://www.voidcn.com/tag/12864%E6%98%BE%E7%A4%BA" title="12864显示"> <span class="new-label">12864显示</span></a>
+	        </div>
+        
+	        <div>
+	        	<span class="source">
+	            	<i style="float:left;">原文</i>&nbsp;&nbsp;
+	            	<a id="originfo" class="cut cut70" href="javascript:void()" target="_blank" tyle="display:inline-block;" rel="nofollow">http://blog.csdn.net/coderwuqiang/article/details/9181853</a>
+	    		</span>
+	        </div>
+    </div>
+    <div class="article_body" id="nei">
+	    	<div><script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 正文顶部广告 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6208739752673518" data-ad-slot="8264218718" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+        <div>
+           <pre class="cpp hljs" name="code"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> "msp430g2553.h"</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> uint unsigned int</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> uchar unsigned char</span>
+
+<span class="hljs-comment">/*****************************************
+ RS---&gt;&gt;P2.0
+ RW---&gt;&gt;P2.1
+ E----&gt;&gt;P2.2   
+ PSB--&gt;&gt;P2.3  
+ PAUSE&gt;&gt;P2.4
+ RES--&gt;&gt;P2.5
+******************************************/</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> DataPort P1OUT        <span class="hljs-comment">//MCU P2&lt;------&gt; LCM</span></span>
+
+<span class="hljs-comment">/*
+void DelayMs(uint x)
+{
+    uint a,b;
+    for(a=0;a&lt;x;a++)
+      for(b=0;b&lt;1000;b++);
+}
+*/</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DelayUs2x</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> t)</span>
+</span>{   
+ <span class="hljs-keyword">while</span>(--t);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DelayMs</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> t)</span>
+</span>{
+     
+ <span class="hljs-keyword">while</span>(t--)
+ {
+     <span class="hljs-comment">//大致延时1mS</span>
+     DelayUs2x(<span class="hljs-number">245</span>);
+	 DelayUs2x(<span class="hljs-number">245</span>);
+ }
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DelayUs</span><span class="hljs-params">(uint x)</span>
+</span>{
+    uint a,b;
+    <span class="hljs-keyword">for</span>(a=<span class="hljs-number">0</span>;a&lt;x;a++)
+      <span class="hljs-keyword">for</span>(b=<span class="hljs-number">0</span>;b&lt;<span class="hljs-number">2</span>;b++);
+}
+<span class="hljs-comment">//检测忙位</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Check_Busy</span><span class="hljs-params">()</span>
+</span>{  
+    P2OUT&amp;=<span class="hljs-number">0xFE</span>;     <span class="hljs-comment">//RS=0</span>
+    P2OUT |=<span class="hljs-number">0x02</span>;    <span class="hljs-comment">//RW=1</span>
+    P2OUT |=<span class="hljs-number">0x04</span>;    <span class="hljs-comment">//E=1</span>
+    DataPort=<span class="hljs-number">0xFF</span>;   <span class="hljs-comment">//</span>
+    P1DIR=<span class="hljs-number">0x00</span>;     <span class="hljs-comment">//数据端口设为输入状态</span>
+    <span class="hljs-keyword">while</span>((P2IN&amp;<span class="hljs-number">0x80</span>)==<span class="hljs-number">0x80</span>);<span class="hljs-comment">//忙则等待</span>
+    P1DIR=<span class="hljs-number">0xFF</span>;    <span class="hljs-comment">//数据端口还原为输出状态</span>
+    P2OUT&amp;=<span class="hljs-number">0xFB</span>;
+}
+
+<span class="hljs-comment">/*---------------------写命令------------------------*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Write_Cmd</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> Cmd)</span>
+</span>{
+	Check_Busy();
+	P2OUT&amp;=<span class="hljs-number">0xFE</span>;   <span class="hljs-comment">//RS=0;</span>
+	P2OUT&amp;=<span class="hljs-number">0xFD</span>;  <span class="hljs-comment">//RW=0;</span>
+	P2OUT |=<span class="hljs-number">0x04</span>;  <span class="hljs-comment">//E=1;</span>
+	DataPort=Cmd;
+	DelayUs(<span class="hljs-number">5</span>);
+	P2OUT&amp;=<span class="hljs-number">0xFB</span>;  <span class="hljs-comment">//E=0;</span>
+	DelayUs(<span class="hljs-number">5</span>);
+}
+<span class="hljs-comment">/*------------------------------------------------
+                    写数据
+------------------------------------------------*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Write_Data</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> Data)</span>
+</span>{
+	Check_Busy();
+	P2OUT |=<span class="hljs-number">0x01</span>;     <span class="hljs-comment">//RS=1;</span>
+	P2OUT&amp;=<span class="hljs-number">0xFD</span>;      <span class="hljs-comment">//RW=0;</span>
+	P2OUT |=<span class="hljs-number">0x04</span>;      <span class="hljs-comment">//E=1;</span>
+	DataPort=Data;
+	DelayUs(<span class="hljs-number">5</span>);
+	P2OUT&amp;=<span class="hljs-number">0xFB</span>;      <span class="hljs-comment">//E=0;</span>
+	DelayUs(<span class="hljs-number">5</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init_ST7920</span><span class="hljs-params">()</span>
+</span>{  
+   DelayMs(<span class="hljs-number">40</span>);           <span class="hljs-comment">//大于40MS的延时程序</span>
+   P2OUT |=<span class="hljs-number">0x08</span>;         <span class="hljs-comment">//PSB=1;  设置为8BIT并口工作模式</span>
+   DelayMs(<span class="hljs-number">1</span>);            <span class="hljs-comment">//延时</span>
+   P2OUT&amp;=<span class="hljs-number">0xDF</span>;           <span class="hljs-comment">//RES=0;  复位</span>
+   DelayMs(<span class="hljs-number">1</span>);            <span class="hljs-comment">//延时</span>
+   P2OUT |=<span class="hljs-number">0x20</span>;          <span class="hljs-comment">//RES=1;    复位置高</span>
+   DelayMs(<span class="hljs-number">10</span>);
+   Write_Cmd(<span class="hljs-number">0x30</span>);       <span class="hljs-comment">//选择基本指令集</span>
+   DelayUs(<span class="hljs-number">50</span>);         <span class="hljs-comment">//延时大于100us</span>
+   Write_Cmd(<span class="hljs-number">0x30</span>);       <span class="hljs-comment">//选择8bit数据流</span>
+   DelayUs(<span class="hljs-number">20</span>);         <span class="hljs-comment">//延时大于37us</span>
+   Write_Cmd(<span class="hljs-number">0x0c</span>);       <span class="hljs-comment">//开显示(无游标、不反白)</span>
+   DelayUs(<span class="hljs-number">50</span>);         <span class="hljs-comment">//延时大于100us</span>
+   Write_Cmd(<span class="hljs-number">0x01</span>);       <span class="hljs-comment">//清除显示，并且设定地址指针为00H</span>
+   DelayMs(<span class="hljs-number">15</span>);           <span class="hljs-comment">//延时大于10ms</span>
+   Write_Cmd(<span class="hljs-number">0x06</span>);       <span class="hljs-comment">//指定在资料的读取及写入时，设定游标的移动方向及指定显示的移位，光标从右向左加1位移动</span>
+   DelayUs(<span class="hljs-number">50</span>);         <span class="hljs-comment">//延时大于100us</span>
+}
+
+<span class="hljs-comment">/*------------------------------------------------
+                   显示字符串
+x:横坐标值，范围0~8
+y:纵坐标值，范围1~4
+------------------------------------------------*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LCD_PutString</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> x,<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> y,<span class="hljs-keyword">char</span> *s)</span>
+</span>{ 
+ <span class="hljs-keyword">switch</span>(y)
+     {
+	  <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>: Write_Cmd(<span class="hljs-number">0x80</span>+x);<span class="hljs-keyword">break</span>;
+	  <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>: Write_Cmd(<span class="hljs-number">0x90</span>+x);<span class="hljs-keyword">break</span>;
+	  <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>: Write_Cmd(<span class="hljs-number">0x88</span>+x);<span class="hljs-keyword">break</span>;
+	  <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>: Write_Cmd(<span class="hljs-number">0x98</span>+x);<span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">default</span>:<span class="hljs-keyword">break</span>;
+	 }
+ <span class="hljs-keyword">while</span>(*s&gt;<span class="hljs-number">0</span>)
+   { 
+      Write_Data(*s);
+      s++;
+      DelayUs(<span class="hljs-number">100</span>);  <span class="hljs-comment">//</span>
+   }
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
+</span>{
+   
+    <span class="hljs-keyword">char</span>* string1=<span class="hljs-string">"12864LCD Demo"</span>;
+    <span class="hljs-keyword">char</span>* string2=<span class="hljs-string">"Demo for Msp430"</span>;
+    <span class="hljs-keyword">char</span>* string3=<span class="hljs-string">"Launch pad G2553"</span>;
+    <span class="hljs-keyword">char</span>* string4=<span class="hljs-string">"电控》微电》哈哈》"</span>;
+    WDTCTL = WDTPW + WDTHOLD;<span class="hljs-comment">//关闭看门狗</span>
+    P1DIR=<span class="hljs-number">0xFF</span>;<span class="hljs-comment">//配置P1为输出，作为数据端口</span>
+    P2DIR=<span class="hljs-number">0xFF</span>;<span class="hljs-comment">//配置P2为输出，作为控制端口</span>
+    Init_ST7920();
+    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
+    {
+    	
+    	LCD_PutString(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,string1);
+    	DelayUs(<span class="hljs-number">20</span>);
+    	LCD_PutString(<span class="hljs-number">0</span>,<span class="hljs-number">2</span>,string2);
+    	DelayUs(<span class="hljs-number">20</span>);
+    	LCD_PutString(<span class="hljs-number">0</span>,<span class="hljs-number">3</span>,string3);
+    	DelayUs(<span class="hljs-number">20</span>);
+    	LCD_PutString(<span class="hljs-number">0</span>,<span class="hljs-number">4</span>,string4);
+    	DelayUs(<span class="hljs-number">20</span>);
+    }
+}
+
+</pre> 
+<p>/********************************<br> 上边是并行，下边是串行</p> 
+<p>*******************************/</p> 
+<p>&nbsp;</p> 
+<pre class="cpp hljs" name="code"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span>  "msp430g2553.h"</span>
+
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> CS1 P1OUT |=0x01			</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> CS0 P1OUT &amp;=0x01</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> SID1 P1OUT |=0x02</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> SID0 P1OUT &amp;=~0x02</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> SCLK1 P1OUT |=0x04</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> SCLK0 P1OUT &amp;=~0x04</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DelayUs2x</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> t)</span>
+</span>{   
+ <span class="hljs-keyword">while</span>(--t);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">delay_1ms</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> t)</span>
+</span>{
+     
+ <span class="hljs-keyword">while</span>(t--)
+ {
+     <span class="hljs-comment">//大致延时1mS</span>
+     DelayUs2x(<span class="hljs-number">245</span>);
+	 DelayUs2x(<span class="hljs-number">245</span>);
+ }
+}
+
+			
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sendbyte</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> zdata)</span>
+</span>{
+	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> i;
+	
+	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">8</span>; i++)
+	{
+		<span class="hljs-keyword">if</span>((zdata &lt;&lt; i) &amp; <span class="hljs-number">0x80</span>)
+		{
+			SID1;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			SID0;
+		}
+		SCLK0;
+		SCLK1;
+	}
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">write_com</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> cmdcode)</span>
+</span>{
+	CS1;
+	sendbyte(<span class="hljs-number">0xf8</span>);   <span class="hljs-comment">//1 1 1 1 RS RW 0   写操作RW=0 11111000写数据 11111010写指令</span>
+	sendbyte(cmdcode &amp; <span class="hljs-number">0xf0</span>);
+	sendbyte((cmdcode &lt;&lt; <span class="hljs-number">4</span>) &amp; <span class="hljs-number">0xf0</span>);
+	delay_1ms(<span class="hljs-number">1</span>);
+	CS0;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">write_data</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> Dispdata)</span>
+</span>{
+	CS1;
+	sendbyte(<span class="hljs-number">0xfa</span>);
+	sendbyte(Dispdata &amp; <span class="hljs-number">0xf0</span>);
+	sendbyte((Dispdata &lt;&lt; <span class="hljs-number">4</span>) &amp; <span class="hljs-number">0xf0</span>);
+	delay_1ms(<span class="hljs-number">1</span>);
+	CS0;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Put_String</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> x,<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> y,<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>* s)</span>
+</span>{
+	 <span class="hljs-keyword">switch</span>(y)
+     {
+	  <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>: write_com(<span class="hljs-number">0x80</span>+x);<span class="hljs-keyword">break</span>;
+	  <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>: write_com(<span class="hljs-number">0x90</span>+x);<span class="hljs-keyword">break</span>;
+	  <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>: write_com(<span class="hljs-number">0x88</span>+x);<span class="hljs-keyword">break</span>;
+	  <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>: write_com(<span class="hljs-number">0x98</span>+x);<span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">default</span>:<span class="hljs-keyword">break</span>;
+	 }
+    <span class="hljs-keyword">while</span>(*s&gt;<span class="hljs-number">0</span>)
+   { 
+      write_data(*s);
+      s++;
+      DelayUs2x(<span class="hljs-number">50</span>);
+   }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lcdinit</span><span class="hljs-params">()</span>
+</span>{
+	delay_1ms(<span class="hljs-number">200</span>);
+	write_com(<span class="hljs-number">0x30</span>);  <span class="hljs-comment">//功能设定：基本指令集</span>
+	delay_1ms(<span class="hljs-number">20</span>);
+	write_com(<span class="hljs-number">0x0c</span>);  <span class="hljs-comment">//显示状态：整体显示，游标关</span>
+	delay_1ms(<span class="hljs-number">20</span>);
+	write_com(<span class="hljs-number">0x01</span>);  <span class="hljs-comment">//清空显示</span>
+	delay_1ms(<span class="hljs-number">200</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">( <span class="hljs-keyword">void</span> )</span>
+</span>{
+	
+	WDTCTL = WDTPW + WDTHOLD; <span class="hljs-comment">//关闭看门狗</span>
+	P1DIR=<span class="hljs-number">0xFF</span>;
+	P1OUT=<span class="hljs-number">0x00</span>;
+	lcdinit();
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
+	{
+	
+       Put_String(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-string">"speed"</span>);   		
+                
+	}
+	
+}
+
+
+</pre>
+        </div>
+            <div class="margin-top-20"></div>
+        	<div><script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 正文底部广告 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6208739752673518" data-ad-slot="9020893119" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+    </div>
+		<div>
+	    	<div class="relative">相关文章</div>
+	    	<ul class="relative_list">
+		                <li>
+		                    1. <a href="http://www.voidcn.com/article/p-hfxulpig-qm.html" target="_blank" title="MSP430学习笔记8-ST7920 12864液晶显示并行接口"> MSP430学习笔记8-ST7920 12864液晶显示并行接口 </a>
+		                </li>
+		                <li>
+		                    2. <a href="http://www.voidcn.com/article/p-kgnlmgbn-ka.html" target="_blank" title="C51 12864串行显示程序"> C51 12864串行显示程序 </a>
+		                </li>
+		                <li>
+		                    3. <a href="http://www.voidcn.com/article/p-usrcrvtn-bmk.html" target="_blank" title="12864液晶并行方式显示"> 12864液晶并行方式显示 </a>
+		                </li>
+		                <li>
+		                    4. <a href="http://www.voidcn.com/article/p-uzspowph-oq.html" target="_blank" title="Launchpad msp430 PWM实验"> Launchpad msp430 PWM实验 </a>
+		                </li>
+		                <li>
+		                    5. <a href="http://www.voidcn.com/article/p-wtyomfra-oq.html" target="_blank" title="Launchpad msp430 Flash探索"> Launchpad msp430 Flash探索 </a>
+		                </li>
+		                <li>
+		                    6. <a href="http://www.voidcn.com/article/p-xlcynnmt-wm.html" target="_blank" title="arm 力天电子lpc2148无字库12864显示一行多个汉字（串行）"> arm 力天电子lpc2148无字库12864显示一行多个汉字（串行） </a>
+		                </li>
+		                <li>
+		                    7. <a href="http://www.voidcn.com/article/p-qnlduqtu-wm.html" target="_blank" title="arm 力天电子lpc2148无字库12864显示多行多个汉字（串行）"> arm 力天电子lpc2148无字库12864显示多行多个汉字（串行） </a>
+		                </li>
+		                <li>
+		                    8. <a href="http://www.voidcn.com/article/p-rquyvizl-bmk.html" target="_blank" title="12864显示图片"> 12864显示图片 </a>
+		                </li>
+		                <li>
+		                    9. <a href="http://www.voidcn.com/article/p-zqbqkbgh-oq.html" target="_blank" title="MSP430 LaunchPad IO外部中断"> MSP430 LaunchPad IO外部中断 </a>
+		                </li>
+		                <li>
+		                    10. <a href="http://www.voidcn.com/article/p-egnzlldg-yy.html" target="_blank" title="串行 并行"> 串行 并行 </a>
+		                </li>
+	            <li><a href="http://www.voidcn.com/relative/p-eablzuon-tv.html" target="_blank" title="MSP430 Launchpad串行/并行12864显示 的相关文章"> 更多相关文章...</a></li>
+	        </ul>
+
+                <div class="margin-top-20"></div>
+                <div>
+                    <div><script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-6208739752673518" data-ad-slot="3534271784"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+                </div>
+            <div class="margin-top-20"></div>
+
+	        <div class="relative">相关标签/搜索</div>
+	        <ul>
+	        			<a target="_blank" href="http://www.voidcn.com/tag/%E5%B9%B6%E8%A1%8C%E6%98%BE%E7%A4%BA" title="并行显示"> <span class="new-label">并行显示</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/tag/%E5%B9%B6%E8%A1%8C%E4%B8%B2%E8%A1%8C" title="并行串行"> <span class="new-label">并行串行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/tag/12864%E6%98%BE%E7%A4%BA" title="12864显示"> <span class="new-label">12864显示</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/tag/%E5%B9%B6%E8%A1%8C%E5%92%8C%E4%B8%B2%E8%A1%8C" title="并行和串行"> <span class="new-label">并行和串行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/tag/%E4%B8%B2%E8%A1%8C%E4%B8%8E%E5%B9%B6%E8%A1%8C" title="串行与并行"> <span class="new-label">串行与并行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/tag/%E4%B8%B2%E8%A1%8C%E5%B9%B6%E5%8F%91" title="串行并发"> <span class="new-label">串行并发</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/tag/%E8%A1%8C%E6%95%B0%E6%98%BE%E7%A4%BA" title="行数显示"> <span class="new-label">行数显示</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/tag/%E6%98%BE%E7%A4%BA%E6%8D%A2%E8%A1%8C" title="显示换行"> <span class="new-label">显示换行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/tag/%E5%A4%9A%E8%A1%8C%E6%98%BE%E7%A4%BA" title="多行显示"> <span class="new-label">多行显示</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/tag/%E6%98%BE%E7%A4%BA%E8%A1%8C" title="显示行"> <span class="new-label">显示行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/cata/889715" title="多行显示"> <span class="new-label">多行显示</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/cata/2226893" title="并行执行"> <span class="new-label">并行执行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/cata/2702691" title="串行"> <span class="new-label">串行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/cata/1201128" title="并行"> <span class="new-label">并行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/cata/1919367" title="并行"> <span class="new-label">并行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/cata/795204" title="并行"> <span class="new-label">并行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/cata/905506" title="并行"> <span class="new-label">并行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/cata/5853143" title="并行"> <span class="new-label">并行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/cata/5721129" title="并行"> <span class="new-label">并行</span></a>
+	        			<a target="_blank" href="http://www.voidcn.com/cata/1716695" title="并行"> <span class="new-label">并行</span></a>
+		        		<a target="_blank" href="http://www.voidcn.com/search/eumqof"><span class="new-label">androidEditText  显示两行</span></a>
+		        		<a target="_blank" href="http://www.voidcn.com/search/rlfqvv"><span class="new-label">java运行显示access denied</span></a>
+		        		<a target="_blank" href="http://www.voidcn.com/search/bzuqzf"><span class="new-label">snort 运行显示libdnet.1</span></a>
+		        		<a target="_blank" href="http://www.voidcn.com/search/nqyvty"><span class="new-label">pycharm 显示换行符号</span></a>
+		        		<a target="_blank" href="http://www.voidcn.com/search/wlgfwy"><span class="new-label">slickedit 2014 显示行号</span></a>
+		        		<a target="_blank" href="http://www.voidcn.com/search/oafgdg"><span class="new-label">c# bat 执行 显示</span></a>
+		        		<a target="_blank" href="http://www.voidcn.com/search/hlmrfu"><span class="new-label">ios UIlabel显示多行 Masonry</span></a>
+		        		<a target="_blank" href="http://www.voidcn.com/search/zrkicp"><span class="new-label">latex algorithm 显示行号</span></a>
+		        		<a target="_blank" href="http://www.voidcn.com/search/xxhntq"><span class="new-label">并行vs并发</span></a>
+		        		<a target="_blank" href="http://www.voidcn.com/search/wuzvub"><span class="new-label">linux mknod串行</span></a>
+	        </ul>
+	    </div>
+    
+    <div class="article_social">
+        <div class="article_like">
+            <div class="circle circle-like" id="my_zan" data_id="eEvIVb6"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="share">
+			<span class="share-left bdsharebuttonbox bdshare-button-style0-24" data-tag="share_1" data-bd-bind="1559461213258">
+				<a href="http://www.voidcn.com/article/p-eablzuon-tv.html#" class="bds_more icon-share" data-cmd="more">
+					<span class="bds_count" data-cmd="count" title="累计分享0次">0</span>
+				</a>
+			</span>
+			<div class="share-right action action-share bdsharebuttonbox bdshare-button-style0-24" data-tag="share_1" data-bd-bind="1559461213258">
+				<span class="bdshare">
+					<a href="http://www.voidcn.com/article/p-eablzuon-tv.html#" class="bds_sinaweibo icon-weibo" data-cmd="tsina" title="分享到新浪微博">分享到微博</a>
+					<a href="http://www.voidcn.com/article/p-eablzuon-tv.html#" class="bds_weixin icon-wechat" data-cmd="weixin" title="分享到微信">分享到微信</a>
+					<a href="http://www.voidcn.com/article/p-eablzuon-tv.html#" class="bds_qq icon-qq" data-cmd="sqq" title="分享到QQ好友">分享到QQ</a>
+				</span>
+			</div>
+		</div>
+		<div class="clear"></div>
+    <div class="bottom_plink huodong-detail-plink-banner clearfix">
+        </div>
+    </div>
+
+
+
+	<script>
+		$(function () {
+		    $("#originfo").text("http://blog.csdn.net/coderwuqiang/article/details/9181853");
+		    $("#originfo").hover(function(){
+		        $("#originfo").attr("href" , "/link?url=http://blog.csdn.net/coderwuqiang/article/details/9181853");
+			},function(){
+		        $("#originfo").attr("href" , "javascript:void()");
+			});
+		});
+	</script>
+	
+    <script src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/article.js" type="text/javascript"></script>
+
+</div>
+<div class="span3 article_right_side">
+    <div class="right_top">
+    	<div id="right_site_articles" class="article_detail_bg">
+    <div class="article-part-title">
+        <span>每日一句</span>
+    </div>
+    <ul class="side_article_list">
+    	每一个你不满意的现在，都有一个你没有努力的曾经。
+    </ul>
+</div><script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边栏 自适应 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6208739752673518" data-ad-slot="8798382113" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+    <div id="right_site_articles">
+        <div class="article-part-title">
+            <span>最新文章</span>
+        </div>
+        <ul class="side_article_list">
+	                <li class="side_article_list_item">1.
+	                    <a href="http://www.voidcn.com/article/p-nnbhgiat-bws.html" target="_blank" title="如何在java 8 lambda表达式中获取方法参数名称？"> 如何在java 8 lambda表达式中获取方法参数名称？ </a>
+	                </li>
+	                <li class="side_article_list_item">2.
+	                    <a href="http://www.voidcn.com/article/p-wtnzremj-bws.html" target="_blank" title="python – 位向量与布尔值性能列表"> python – 位向量与布尔值性能列表 </a>
+	                </li>
+	                <li class="side_article_list_item">3.
+	                    <a href="http://www.voidcn.com/article/p-okdivemb-bws.html" target="_blank" title="是否有必要在预测之前对数据进行居中和缩放？"> 是否有必要在预测之前对数据进行居中和缩放？ </a>
+	                </li>
+	                <li class="side_article_list_item">4.
+	                    <a href="http://www.voidcn.com/article/p-oblvehdd-bws.html" target="_blank" title="reactjs – 如何在react-native中的Text组件onPress中获取文本"> reactjs – 如何在react-native中的Text组件onPress中获取文本 </a>
+	                </li>
+	                <li class="side_article_list_item">5.
+	                    <a href="http://www.voidcn.com/article/p-ptvnicwi-bws.html" target="_blank" title="java – autobox原始文字是否有性能成本？"> java – autobox原始文字是否有性能成本？ </a>
+	                </li>
+	                <li class="side_article_list_item">6.
+	                    <a href="http://www.voidcn.com/article/p-zsbkkfua-bws.html" target="_blank" title="用什么机制来确定tinkerpop / titan中顶点的绝对顺序？"> 用什么机制来确定tinkerpop / titan中顶点的绝对顺序？ </a>
+	                </li>
+	                <li class="side_article_list_item">7.
+	                    <a href="http://www.voidcn.com/article/p-omaebich-bws.html" target="_blank" title="java – Netty获取一个exceptionCaught()事件被触发,它到达TextWebsocketEncoder管道的尾部"> java – Netty获取一个exceptionCaught()事件被触发,它到达TextWebsocketEncoder管道的尾部 </a>
+	                </li>
+	                <li class="side_article_list_item">8.
+	                    <a href="http://www.voidcn.com/article/p-mtvbnpxm-bws.html" target="_blank" title="我的浏览器与我的CSS不匹配(但jQuery确实如此)"> 我的浏览器与我的CSS不匹配(但jQuery确实如此) </a>
+	                </li>
+	                <li class="side_article_list_item">9.
+	                    <a href="http://www.voidcn.com/article/p-hbfxiqxe-bws.html" target="_blank" title="dust.js – DustJs中的函数调用和检查结果"> dust.js – DustJs中的函数调用和检查结果 </a>
+	                </li>
+	                <li class="side_article_list_item">10.
+	                    <a href="http://www.voidcn.com/article/p-pmdpjckm-bws.html" target="_blank" title="asp.net-core – RenderPartial()在ASP.Net 5 MVC 6中的位置？"> asp.net-core – RenderPartial()在ASP.Net 5 MVC 6中的位置？ </a>
+	                </li>
+        </ul>
+        
+        
+    </div>
+
+    </div>
+
+    <div class="operate_zone" style="position: fixed; top: 60px; width: 277px;">
+<div id="right_site_articles" class="article_detail_bg margin-top10">
+    <div class="article-part-title">
+        <span><a href="http://www.voidcn.com/contact" target="_blank">本站公众号</a></span>
+    </div>
+    <div class="side_article_list user-head">
+    	<span style="color: #5ba607;font-size:14px;">&nbsp;&nbsp;&nbsp;欢迎关注本站公众号,获取更多程序园信息</span><br>
+    	<img src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/qrcode_develong_1.jpg" alt="开发小院">
+    </div>
+</div>
+
+    <div id="right_site_articles">
+        <div class="article-part-title">
+            <span>相关文章</span>
+        </div>
+        <ul class="side_article_list">
+	                <li class="side_article_list_item">1.
+	                    <a href="http://www.voidcn.com/article/p-hfxulpig-qm.html" target="_blank" title="MSP430学习笔记8-ST7920 12864液晶显示并行接口"> MSP430学习笔记8-ST7920 12864液晶显示并行接口 </a>
+	                </li>
+	                <li class="side_article_list_item">2.
+	                    <a href="http://www.voidcn.com/article/p-kgnlmgbn-ka.html" target="_blank" title="C51 12864串行显示程序"> C51 12864串行显示程序 </a>
+	                </li>
+	                <li class="side_article_list_item">3.
+	                    <a href="http://www.voidcn.com/article/p-usrcrvtn-bmk.html" target="_blank" title="12864液晶并行方式显示"> 12864液晶并行方式显示 </a>
+	                </li>
+	                <li class="side_article_list_item">4.
+	                    <a href="http://www.voidcn.com/article/p-uzspowph-oq.html" target="_blank" title="Launchpad msp430 PWM实验"> Launchpad msp430 PWM实验 </a>
+	                </li>
+	                <li class="side_article_list_item">5.
+	                    <a href="http://www.voidcn.com/article/p-wtyomfra-oq.html" target="_blank" title="Launchpad msp430 Flash探索"> Launchpad msp430 Flash探索 </a>
+	                </li>
+	                <li class="side_article_list_item">6.
+	                    <a href="http://www.voidcn.com/article/p-xlcynnmt-wm.html" target="_blank" title="arm 力天电子lpc2148无字库12864显示一行多个汉字（串行）"> arm 力天电子lpc2148无字库12864显示一行多个汉字（串行） </a>
+	                </li>
+	                <li class="side_article_list_item">7.
+	                    <a href="http://www.voidcn.com/article/p-qnlduqtu-wm.html" target="_blank" title="arm 力天电子lpc2148无字库12864显示多行多个汉字（串行）"> arm 力天电子lpc2148无字库12864显示多行多个汉字（串行） </a>
+	                </li>
+	                <li class="side_article_list_item">8.
+	                    <a href="http://www.voidcn.com/article/p-rquyvizl-bmk.html" target="_blank" title="12864显示图片"> 12864显示图片 </a>
+	                </li>
+	                <li class="side_article_list_item">9.
+	                    <a href="http://www.voidcn.com/article/p-zqbqkbgh-oq.html" target="_blank" title="MSP430 LaunchPad IO外部中断"> MSP430 LaunchPad IO外部中断 </a>
+	                </li>
+	                <li class="side_article_list_item">10.
+	                    <a href="http://www.voidcn.com/article/p-egnzlldg-yy.html" target="_blank" title="串行 并行"> 串行 并行 </a>
+	                </li>
+        </ul>
+        
+        	<div style="padding-left:10px;font-size:14px;padding-bottom:10px;">
+        		<a href="http://www.voidcn.com/relative/p-eablzuon-tv.html" target="_blank" title="MSP430 Launchpad串行/并行12864显示 的相关文章"> &gt;&gt;更多相关文章&lt;&lt; </a>
+    		</div>
+        
+    </div>
+
+    </div>
+</div>
+
+	</div>
+
+	<script type="text/javascript">
+        $('table').each(function (i) {
+            var size = $(this).children().size();
+            if (size > 1) {
+                $(this).attr('class', "table table-bordered");
+            } else if (size == 1) {
+                var e11 = $(this).children(":first");
+                var e1 = e11[0];
+                var name = e1.nodeName.toLowerCase();
+                if ("tbody" == name) {
+                    if (e1.children.length > 1) {
+                        $(this).attr('class', "table table-bordered");
+                    } else if (e1.children.length == 1) {
+                        var e12 = e1.children[0];
+                        var name2 = e12.nodeName.toLowerCase();
+                        if ("tr" == name2) {
+                            if (e12.children.length > 1) {
+                                $(this).attr('class', "table table-bordered");
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        window.page = 0;
+        window.last = 0;
+        window.first = true;
+        resize_article_image('#nei', 550);
+        
+        
+        
+		+ (function($){
+			window._bd_share_config = {
+				common: {
+					"bdText": "【" + $("title").text() + "】" + $(".post-content p:lt(2)").text(),
+					"bdMini": "2",
+					"bdMiniList": false,
+					"bdPic": $(".post-content img:first") ? $(".post-content img:first").attr("src") : "",
+					"bdStyle": "0",
+					"bdSize": "24"
+				},
+				share: [{
+					bdCustomStyle: 'http://static02.voidcn.com/voidcn/css/share.css'
+				}],
+			};
+			with(document) 0[(getElementsByTagName("head")[0] || body).appendChild(createElement("script")).src = "http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=" + ~ ( - new Date() / 36e5)];
+		})(window.jQuery);
+    </script>
+</div>
+<script type="text/javascript" src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/highlight.pack.js"></script>
+<link href="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/docco.css" media="screen" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+$('pre').each(function(i, e) {
+    hljs.highlightBlock(e, "<span class='indent'>  </span>", false)
+});
+</script>
+<div class="footer">
+    <div class="footer-inner" style="padding-top: 50px;padding-bottom: 50px">
+        <a href="http://www.voidcn.com/contact" target="_blank">意见反馈</a>
+        <a href="http://www.voidcn.com/search">最近搜索</a>
+        <a href="http://www.voidcn.com/recent">最新文章</a>
+       	<script src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/z_stat.php" language="JavaScript"></script><script src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/core.php" charset="utf-8" type="text/javascript"></script><a href="https://www.cnzz.com/stat/website.php?web_id=1258680759" target="_blank" title="站长统计">站长统计</a>
+        <a href="http://cn.voidcc.com/" target="_blank">程序问答</a>
+        <a href="http://hk.voidcc.com/" target="_blank">程序問答</a>
+
+       		<div style="display:none;"><script src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/z_stat(1).php" language="JavaScript"></script><script src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/core(1).php" charset="utf-8" type="text/javascript"></script><a href="https://www.cnzz.com/stat/website.php?web_id=1261868352" target="_blank" title="站长统计">站长统计</a></div>
+    </div>
+    <div style="display:none;">
+		<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "https://hm.baidu.com/hm.js?05fb07b91f60527211b85c9c9b431b73";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+		</script>
+	</div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-77509369-1');
+    </script>
+</div>
+
+<script type="text/javascript" src="./MSP430 Launchpad串行_并行12864显示 - 程序园_files/tip.js" async=""></script>
+
+
+<div class="return" title="返回顶部" style="display: block;"></div></body></html>

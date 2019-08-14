@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://my.oschina.net/xlazhh/blog/300854 -->
+<html class="gr__my_oschina_net" style="zoom: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="referrer" content="always">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA</title>
+            <meta name="keywords" content="爱吃橙子的小石头,xlazhh,硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面,OSCHINA博客">
+                <meta name="description" content="MSP430">
+        <link rel="stylesheet" type="text/css" href="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/semantic.min.css">
+                <link type="text/css" rel="stylesheet" href="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/space.628313b8.css">        <script async="" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/gio.js"></script><script src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/hm.js"></script><script src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/push.js"></script><script type="text/javascript">window.__STATIC_DOMAIN = "https://static.oschina.net";</script>
+    <script src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.oschina.net/new-osc/img/favicon.ico">
+    <link rel="alternate" type="application/rss+xml" title="最新开源项目" href="https://www.oschina.net/project/rss">
+    <link rel="alternate" type="application/rss+xml" title="最新开源资讯" href="https://www.oschina.net/news/rss">
+    <link rel="alternate" type="application/rss+xml" title="最新问题列表" href="https://www.oschina.net/question/rss">
+    <link rel="alternate" type="application/rss+xml" title="最新翻译列表" href="https://www.oschina.net/translate/rss">
+    <link rel="alternate" type="application/rss+xml" title="最新博客列表" href="https://www.oschina.net/blog/rss">
+    <link rel="alternate" type="application/rss+xml" title="推荐博客列表" href="https://www.oschina.net/blog/rss?show=more">
+    <link rel="alternate" type="application/rss+xml" title="推荐软件列表" href="https://www.oschina.net/project/rss?show=recomms">
+    <link rel="alternate" type="application/rss+xml" title="最新代码分享列表" href="https://www.oschina.net/code/rss">
+    <link rel="alternate" type="application/rss+xml" title="OSCHINA - 源码列表" href="https://www.oschina.net/code/source_rss">
+<script src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/share.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/jquery.serialize-object.min.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/jquery.serialize-object.min.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/radarChart.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/jquery.serialize-object.min.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/jquery.serialize-object.min.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/vue.min.js"></script><link rel="stylesheet" type="text/css" href="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/viewer.min.css"><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/viewer.min.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/vue.min.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/osc-message.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/osc-message.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/osc-message.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/osc-message.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/jquery-viewer.min.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/jquery.caret.min.js"></script><script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/jquery.atwho.min.js"></script></head>
+<body data-gr-c-s-loaded="true" class="pushable"><svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;"><symbol id="oicon-world" viewBox="0 0 1024 1024"><path d="M921.6 204.8h-1.024A510.464 510.464 0 0 0 512 0C229.696 0 0 229.696 0 512s229.696 512 512 512c167.04 0 315.072-80.64 408.576-204.8h1.024v-1.28C985.6 732.416 1024 626.816 1024 512s-38.4-220.416-102.4-305.92V204.8zM358.4 891.456A409.984 409.984 0 0 1 102.4 512c0-17.408 1.408-34.432 3.52-51.2H153.6l51.2 102.4v102.4L307.2 768l51.2 51.2v72.256zM512 921.6a408.32 408.32 0 0 1-96.448-11.904L460.8 819.2l51.2-102.4V614.4H409.6l-51.2-51.2h-51.2L256 460.8l51.2-102.4 51.2-51.2 51.2-51.2 51.2-102.4v-47.68c16.768-2.112 33.792-3.52 51.2-3.52a407.04 407.04 0 0 1 256 90.368V256l-51.2 102.4 51.2 51.2v51.2l-102.4 51.2-51.2 52.032 51.2 50.368 51.2 51.2 51.2 102.4 33.472 33.472A408.32 408.32 0 0 1 512 921.6z"></path></symbol><symbol id="oicon-setting" viewBox="0 0 1162 1024"><path d="M1055.479204 128.810127H442.676311c-10.415913-55.551537-57.287523-97.21519-116.311031-97.21519-57.287523 0-105.895118 41.663653-116.31103 97.21519H53.815552c-10.415913 0-19.095841 8.679928-19.095841 20.831826s8.679928 20.831826 20.831826 20.831826h156.238698c10.415913 55.551537 57.287523 97.21519 116.311031 97.21519 57.287523 0 105.895118-41.663653 116.311031-97.21519h611.066907c12.151899 0 20.831826-8.679928 20.831827-20.831826s-8.679928-20.831826-20.831827-20.831826zM328.101266 224.289331c-41.663653 0-76.383363-34.719711-76.383364-76.383364 0-41.663653 34.719711-76.383363 76.383364-76.383363 41.663653 0 76.383363 34.719711 76.383363 76.383363 0 41.663653-34.719711 76.383363-76.383363 76.383364zM1055.479204 840.564195H637.106691c-10.415913-55.551537-57.287523-97.21519-116.311031-97.21519-57.287523 0-105.895118 41.663653-116.311031 97.21519H55.551537c-12.151899 0-20.831826 8.679928-20.831826 20.831827s8.679928 20.831826 20.831826 20.831826h348.933092c10.415913 55.551537 57.287523 97.21519 116.311031 97.21519 57.287523 0 105.895118-41.663653 116.311031-97.21519H1055.479204c12.151899 0 20.831826-8.679928 20.831827-20.831826 0-10.415913-8.679928-20.831826-20.831827-20.831827z m-534.683544 97.21519c-41.663653 0-76.383363-34.719711-76.383363-76.383363 0-41.663653 34.719711-76.383363 76.383363-76.383364 41.663653 0 76.383363 34.719711 76.383364 76.383364-1.735986 41.663653-34.719711 76.383363-76.383364 76.383363zM1055.479204 484.687161h-67.703435c-10.415913-55.551537-57.287523-97.21519-116.311031-97.21519-57.287523 0-105.895118 41.663653-116.311031 97.21519H55.551537c-12.151899 0-20.831826 8.679928-20.831826 20.831826s8.679928 20.831826 20.831826 20.831827h699.60217c10.415913 55.551537 57.287523 97.21519 116.311031 97.21519 57.287523 0 105.895118-41.663653 116.311031-97.21519h67.703435c12.151899 0 20.831826-8.679928 20.831827-20.831827s-8.679928-20.831826-20.831827-20.831826z m-184.014466 97.21519c-41.663653 0-76.383363-34.719711-76.383364-76.383364 0-41.663653 34.719711-76.383363 76.383364-76.383363 41.663653 0 76.383363 34.719711 76.383363 76.383363 0 41.663653-34.719711 76.383363-76.383363 76.383364z"></path></symbol><symbol id="oicon-gitee" viewBox="0 0 1024 1024"><path d="M966.524718 400.672821H456.520205c-24.497231 0-44.347077 19.954872-44.347077 44.557128v133.540102c0 24.602256 19.849846 44.530872 44.347077 44.530872h288.295385c33.266872 0 44.320821 11.132718 44.347077 44.530872 0.026256 89.035487-50.884923 133.566359-133.041231 133.566359h-376.779487c-24.602256 0-44.530872-19.954872-44.530872-44.530872v-400.67282c0-73.780513 59.575795-133.592615 133.014974-133.592616h598.593641c24.470974 0 44.320821-19.928615 44.320821-44.504615V44.530872C1010.740513 19.928615 990.916923 0 966.419692 0H367.826051C171.979487 0 13.128205 159.455179 13.128205 356.168205v623.32718C13.128205 1004.045128 32.978051 1024 57.475282 1024h598.646154c196.187897 0 352.439795-170.325333 354.619077-367.327179 0.131282-11.106462 0.131282-200.33641 0.131282-211.442872a44.478359 44.478359 0 0 0-44.347077-44.530872z"></path></symbol><symbol id="oicon-trending" viewBox="0 0 1106 1024"><path d="M0 290.766798m55.308301 0l0 0q55.308301 0 55.3083 55.3083l0 608.391307q0 55.308301-55.3083 55.3083l0 0q-55.308301 0-55.308301-55.3083l0-608.391307q0-55.308301 55.308301-55.3083Z" fill="#F5A623"></path><path d="M331.849803 14.225295m55.308301 0l0 0q55.308301 0 55.308301 55.3083l0 884.93281q0 55.308301-55.308301 55.3083l0 0q-55.308301 0-55.308301-55.3083l0-884.93281q0-55.308301 55.308301-55.3083Z" fill="#F5A623" opacity=".8"></path><path d="M663.699607 401.383399m55.3083 0l0 0q55.308301 0 55.308301 55.3083l0 497.774706q0 55.308301-55.308301 55.3083l0 0q-55.308301 0-55.3083-55.3083l0-497.774706q0-55.308301 55.3083-55.3083Z" fill="#F5A623" opacity=".6"></path><path d="M995.54941 124.841896m55.308301 0l0 0q55.308301 0 55.3083 55.308301l0 774.316208q0 55.308301-55.3083 55.3083l0 0q-55.308301 0-55.308301-55.3083l0-774.316208q0-55.308301 55.308301-55.308301Z" fill="#F5A623" opacity=".4"></path></symbol></svg>
+        <val data-name="space_user_url" data-value="https://my.oschina.net/xlazhh"></val>      <val data-name="g_user_url" data-value=""></val>      <val data-name="api_prefix" data-value="/action"></val>      <val data-name="g_user_code" data-value=""></val>     <val data-name="g_user_id" data-value=""></val>     <val data-name="g_user" data-value=""></val>     <val data-name="login_page" data-value="https://www.oschina.net/home/login?goto_page=https%3A%2F%2Fmy.oschina.net%2Fxlazhh%2Fblog%2F300854"></val>     
+    
+                <val data-name="weixinAppId" data-value=""></val>
+        <val data-name="weixinTimestamp" data-value=""></val>
+        <val data-name="weixinNonceStr" data-value=""></val>
+        <val data-name="weixinSignature" data-value=""></val>
+        <val data-name="weixinShareUrl" data-value=""></val>                             
+                <val data-name="is_detail_page" data-value="true"></val>
+
+        
+        <div class="ui left inverted sidebar vertical menu" id="mobileNavSidebar">
+        <a href="https://www.oschina.net/project" class="item project">开源软件</a>
+        <a href="https://www.oschina.net/question" class="item question">问答</a>
+        <a href="https://www.oschina.net/tweets" class="item tweet">动弹</a>
+        <a href="https://www.oschina.net/blog" class="item blog">博客</a>
+        <a href="https://www.oschina.net/translate" class="item translate">翻译</a>
+        <a href="https://www.oschina.net/news" class="item news">资讯</a>
+        <a href="https://gitee.com/?from=osc-index" class="item gitee" target="_blank">码云</a>
+        <a href="https://zb.oschina.net/projects/list.html" class="item" target="_blank">众包</a>
+        <a href="https://www.oschina.net/event/ych" class="item meetup">源创会</a>
+        <a href="https://www.oschina.net/event" class="item">活动</a>
+        <a href="https://job.oschina.net/" class="item" target="_blank">求职/招聘</a>
+        <a href="https://www.oschina.net/question/topic/masteronline" class="item">高手问答</a>
+        <a href="https://www.oschina.net/question/topic/osc-interview" class="item">开源访谈</a>
+        <a href="https://my.oschina.net/editorial-story" class="item">周刊</a>
+        <a href="https://www.oschina.net/company" class="item">公司开源导航页</a>
+    </div>
+        <div class="ui right inverted sidebar vertical menu" id="mobileUserSidebar">
+                    <a class="item" href="https://www.oschina.net/home/login?goto_page=https%3A%2F%2Fmy.oschina.net%2Fxlazhh%2Fblog%2F300854">登录</a>
+            <a class="item" href="https://www.oschina.net/home/reg?goto_page=https%3A%2F%2Fmy.oschina.net%2Fxlazhh%2Fblog%2F300854">注册</a>
+            </div>
+
+        <div class="ui vertical inverted right sidebar menu" id="sideMenu">
+    <div class="header">
+        <b>文档章节</b>
+    </div>
+    <div class="ui basic segment" id="sideMenuBody"></div>
+</div>
+<div class="ui black big launch right attached fixed button" id="sideMenuLauncher">
+    <i class="list icon"></i>
+    <span class="text">文档章节</span>
+</div>
+
+
+        <div class="pusher  mobile-disabled-fixed-menu  ">
+                <div class="ui secondary inverted fixed menu" id="headerNavMenu">
+            <a class="item logo" href="https://www.oschina.net/" title="OSCHINA"><img src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/logo_new.svg" alt="OSCHINA"></a>
+                                                <form action="https://www.oschina.net/search" class="item search-item">
+                <div class="ui icon input">
+                    <input type="hidden" name="scope" value="blog">
+                    <input placeholder="大家都在搜...." id="keyword" name="q" size="24" value="" type="text">
+                    <i class="search link icon"></i>
+                </div>
+                <div class="results"></div>
+            </form>
+            <div class="item download-item">
+                <a class="ui primary button" id="btnDownloadApp" href="https://www.oschina.net/app" target="_blank">下载APP</a>
+            <div class="ui popup bottom left transition hidden" id="btnDownloadAppContent" style="top: 28px; left: 0px; bottom: auto; right: auto;">
+                <h3 class="header">OSCHINA App —— <br>关注技术领域的头条文章</h3>
+                <p>聚合全网技术文章，根据你的阅读喜好进行个性推荐</p>
+                <img width="200" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/osc_app_download_qrcode.png" alt="下载APP">
+            </div></div>
+            
+            <div class="ui secondary text menu" id="menuList">
+                <a href="https://www.oschina.net/project" class="item project">开源软件</a>
+                <a href="https://www.oschina.net/question" class="item question">问答</a>
+                <a href="https://www.oschina.net/tweets" class="item tweet">动弹</a>
+                <a href="https://www.oschina.net/blog" class="item blog">博客</a>
+                <a href="https://www.oschina.net/translate" class="item translate">翻译</a>
+                <a href="https://www.oschina.net/news" class="item news">资讯</a>
+                <a href="https://gitee.com/?from=osc-index" class="item gitee" target="_blank">码云<span class="floating ui red label giteetip">代码托管</span></a>
+                <a href="https://zb.oschina.net/projects/list.html" class="item" target="_blank">众包</a>
+                <a href="https://www.oschina.net/event" class="item event">活动</a>
+            </div>
+            <div class="ui dropdown item" id="moreMenu" tabindex="0">
+                更多 <i class="dropdown icon" tabindex="0"><div class="menu" tabindex="-1"></div></i>
+                <div class="menu" tabindex="-1">
+                    <a href="https://www.oschina.net/event/ych" class="item meetup"><i class="world icon"></i>源创会</a>
+                    <a href="https://job.oschina.net/" class="item" target="_blank"><i class="address card outline icon"></i>求职/招聘</a>
+                    <a href="https://www.oschina.net/question/topic/masteronline" class="item"><i class="spy icon"></i>高手问答</a>
+                    <a href="https://www.oschina.net/question/topic/osc-interview" class="item"><i class="coffee icon"></i>开源访谈</a>
+                    <a href="https://my.oschina.net/editorial-story" class="item"><i class="calendar outline icon"></i>周刊</a>
+                    <a href="https://www.oschina.net/company" class="item"><i class="building outline icon"></i>公司开源导航页</a>
+                </div>
+            </div>
+            <div class="right menu">
+                                    <a class="item" href="https://www.oschina.net/home/login?goto_page=https%3A%2F%2Fmy.oschina.net%2Fxlazhh%2Fblog%2F300854">登录</a>
+                    <a class="item" href="https://www.oschina.net/home/reg?goto_page=https%3A%2F%2Fmy.oschina.net%2Fxlazhh%2Fblog%2F300854">注册</a>
+                            </div>
+        </div>
+                <div class="ui secondary inverted fixed menu" id="mobileHeaderNavMenu">
+            <a class="icon item toggle-mobile-nav-sidebar">
+                <i class="large content icon"></i>
+            </a>
+            <div class="logo back-to-top-toggle"><img src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/logo_new.svg" alt="OSCHINA"></div>
+            <a class="icon item toggle-mobile-user-sidebar">
+                                    <i class="large user outline icon"></i>
+                            </a>
+        </div>
+                <div id="mainScreen">
+            <div class="ui container">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+<x-foo-define data-define="space-blog-detail"></x-foo-define> 
+<val data-name="objId" data-value="300854"></val> <val data-name="author_id" data-value="1413857"></val> <val data-name="space_user_id" data-value="1413857"></val> 
+<val data-name="fetchCommentsUrl" data-value="?type=comments"></val>              <val data-name="publishCommentUrl" data-value="/space/blog/add_comment"></val>    <val data-name="replyCommentUrl" data-value="/space/blog/add_comment"></val>      <val data-name="deleteCommentUrl" data-value="/space/blog/delete_blog_comments"></val>  
+<val data-name="weixinShareTitle" data-value="硬件之路-串行LCD12864之MSP430简单实现"></val> <val data-name="weixinShareImgUrl" data-value="http://static.oschina.net/uploads/space/2014/0813/180144_s4QJ_1413857.jpg"></val> 
+<div class="ui internally grid blog-detail bg-wrap">
+    <div class="row">
+        <div class="two wide computer only column" style="height: 5753px; min-height: 342px;">
+            <div class="ui sticky float-menu fixed top" id="floatMenu" style="left: 342.5px; width: 128px !important; height: 342px !important; margin-top: 200px;">
+                <div class="ui vertical large compact menu">
+                                            <a class="item donate" donate="" data-id="300854" data-obj-type="16344358" data-subject="硬件之路-串行LCD12864之MSP430简单实现" data-donater="" data-author="1413857" data-return-url="https://my.oschina.net/xlazhh/blog/300854" data-notify-url="https://my.oschina.net/action/donate/paySuccess">                             <i class="yen icon"></i>打赏</a>
+                                        <a class="item comment-btn" href="https://my.oschina.net/xlazhh/blog/300854#comments" title="共有 0 条评论"><i class="comment outline icon"></i>评论</a>
+                    <a class="item collect-btn " data-id="300854" data-user-id="1413857" data-obj-type="3" data-max="99" data-tag-required="" data-current-user-id="" data-recommend-tags=""><i class="star outline icon"></i>收藏</a>
+                    <a class="item like article-like " data-id="300854"><i class="thumbs up outline icon"></i>点赞</a>
+                    <h5 class="ui item inverted brown header">分享文章</h5>
+                    <div class="bdsharebuttonbox reset left-menu bdshare-button-style0-16" data-tag="share-news" data-bd-bind="1559461076527">
+                        <a class="item" data-cmd="tsina" title="分享到新浪微博"><i class="weibo icon"></i>微博</a>
+                        <a class="item" data-cmd="sqq" title="分享到QQ好友"><i class="qq icon"></i>QQ</a>
+                        <a class="item" data-cmd="weixin" title="分享到微信"><i class="weixin icon"></i>微信</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="twelve wide computer sixteen wide tablet sixteen wide mobile column body-container">
+            <div class="float-menu-content">
+                <div class="ui large breadcrumb">
+                    <a class="section" href="https://my.oschina.net/xlazhh">极北以南的个人页面</a>
+                                                                <i class="right chevron icon divider"></i>
+                        <a class="section" href="https://my.oschina.net/xlazhh?tab=newest&amp;catalogId=532584">硬件编程</a>
+                                        <i class="right chevron icon divider"></i>
+                    <div class="active section">正文</div>
+                </div>
+                <div class="article-detail">
+                                            <div class="ad-wrap">
+                                                    <div id="blog-title-ad" data-traceid="blog_ali" data-tracepid="blogdown" style="">
+<a href="http://clickc.admaster.com.cn/c/a128310,b3471905,c3159,i0,m101,8a1,8b2,h" target="_blank" style="max-width:780px;"><img src="https://oscimg.oschina.net/oscnet/d49ee0030b41c8ed36ff85e442767f0cfd5.jpg"></a>
+</div>
+
+<!--
+<script>
+    function success_jsonpCallback(data) {
+        var obj = eval(data);
+        if( obj.success ){
+            var contents = eval(obj.data[0].content);
+            if(contents.length > 0){
+                var content = contents[0];
+                $('#blog-title-ad').prepend("<a  href='"+ content.url +"' target='_blank' style='max-width:780px;'><img src='"+content.img+"'/></a>");
+                $('#blog-title-ad').show();
+            }
+            
+        }else {
+            $('#blog-title-ad').hide();
+        }
+    }
+    window.addEventListener("load", function() {
+         var url="  http://clickc.admaster.com.cn/c/a116493,b2949390,c3159,i0,m101,8a1,8b2,h";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            jsonp: "callback",
+            dataType: 'jsonp',
+            jsonpCallback: 'success_jsonpCallback',
+            contentType: "application/json; charset=utf-8",
+            success: function( response ) {
+                // do in callback
+            },
+            error:function(){
+                $('#blog-title-ad').hide();
+            }
+        });
+    }, false);
+</script>
+-->
+                                    </div>
+                                        <h2 class="header">
+                        硬件之路-串行LCD12864之MSP430简单实现
+                                                                                                    <div class="ui teal label horizontal" data-tooltip="原创">原</div>
+                                                                                            </h2>
+                    <div class="extra ui horizontal list meta-wrap">
+                        <div class="item">
+                            <a href="https://my.oschina.net/xlazhh" class="__user">                        <div class="osc-avatar small-portrait _35x35 avatar" title="爱吃橙子的小石头" data-user-id="1413857">
+                <img src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/1413857_50.jpg" alt="爱吃橙子的小石头" title="爱吃橙子的小石头">
+            </div>
+            &nbsp;<span>爱吃橙子的小石头</span></a>
+                            发布于 2014/08/13 18:04</div>
+                        <div class="item">字数 749</div>
+                        <div class="item">阅读 92</div>
+                        <div class="item collect-btn " data-id="300854" data-user-id="1413857" data-obj-type="3" data-max="99" data-tag-required="" data-current-user-id="" data-recommend-tags="">收藏 <span data-collect-count="" data-id="300854" data-obj-type="3">0</span></div>
+                        <div class="item"><a class="normal like article-like " data-id="300854">点赞 <span data-article-like-count="">0</span></a></div>
+                        <div class="item comment-count"><a href="https://my.oschina.net/xlazhh/blog/300854#comments" class="normal"><i class="comment outline icon"></i> 评论 <span data-article-reply-count="">0</span></a></div>
+                                            </div>
+                                        <div class="content" id="articleContent">
+                                                    <div class="ad-wrap">
+                                                        <p style="margin:0 0 10px 0;"><a data-traceid="blog_detail_above_text_link_1" data-tracepid="blog_detail_above_text_link" style="color:#A00;font-weight:bold;" href="https://my.oschina.net/u/2663968/blog/3051541" target="_blank">为什么80%的码农都做不了架构师？&gt;&gt;&gt; </a>&nbsp;&nbsp;<img src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/hot3.png" align="absmiddle" style="max-height: 32px; max-width: 32px;"></p>
+                                        </div>
+                                                <p style="text-align:center"><br></p> 
+<p>串行LCD12864引脚接法：</p> 
+<p style="text-align: center"><img src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/180144_s4QJ_1413857.jpg" class="zoom-in-cursor"></p> 
+<p>实现代码（MSP430）：</p> 
+<pre class="brush:java;toolbar: true; auto-links: false;"><code class="hljs cpp"><span class="hljs-comment">/*
+&nbsp;*&nbsp;12864.c
+&nbsp;*&nbsp;&nbsp;Created&nbsp;on:&nbsp;2014-7-15
+&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author:&nbsp;bazingagain
+&nbsp;*/</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span>&nbsp;<span class="hljs-meta-string">&lt;msp430.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span>&nbsp;<span class="hljs-meta-string">"12864.h"</span></span>
+
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：delay
+&nbsp;*&nbsp;功能：延时函数，延时时间为100us&nbsp;*&nbsp;x
+&nbsp;*&nbsp;参数：x
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">delay</span><span class="hljs-params">(uint&nbsp;x)</span>
+</span>{
+	uint&nbsp;i,j;
+	<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;x;j++)
+		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++);
+}
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：sendByte
+&nbsp;*&nbsp;功能：向LCD12864串行发送1BYET数据
+&nbsp;*&nbsp;参数：command
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">sendByte</span><span class="hljs-params">(uchar&nbsp;command)</span>
+</span>{
+	uchar&nbsp;i;
+	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">8</span>;i++)
+	{
+		<span class="hljs-keyword">if</span>((command&lt;&lt;i)&nbsp;&amp;&nbsp;<span class="hljs-number">0x80</span>)
+		{
+			P2OUT&nbsp;|=&nbsp;BIT1;&nbsp;&nbsp;<span class="hljs-comment">//sid=1;</span>
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			P2OUT&nbsp;&amp;=&nbsp;(~BIT1);&nbsp;<span class="hljs-comment">//sid=0;</span>
+		}
+		P2OUT&nbsp;&amp;=&nbsp;(~BIT2);&nbsp;&nbsp;<span class="hljs-comment">//SCLK=0</span>
+		P2OUT&nbsp;|=&nbsp;BIT2;&nbsp;&nbsp;<span class="hljs-comment">//SCLK=1</span>
+
+	}
+}
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：writeCom
+&nbsp;*&nbsp;功能：向LCD1264写指令函数
+&nbsp;*&nbsp;参数：command
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">writeCom</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span>&nbsp;<span class="hljs-keyword">char</span>&nbsp;command)</span>
+</span>{
+<span class="hljs-comment">//	P2OUT&nbsp;|=&nbsp;BIT0;&nbsp;&nbsp;//CS&nbsp;=P20&nbsp;&nbsp;CS=1</span>
+	sendByte(<span class="hljs-number">0xf8</span>);&nbsp;&nbsp;<span class="hljs-comment">//传送指令</span>
+	sendByte(command&nbsp;&amp;&nbsp;<span class="hljs-number">0xf0</span>);
+	sendByte((command&nbsp;&lt;&lt;&nbsp;<span class="hljs-number">4</span>)&nbsp;&amp;&nbsp;<span class="hljs-number">0xf0</span>);
+	delay(<span class="hljs-number">2</span>);
+}
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：writeData
+&nbsp;*&nbsp;功能：向LCD1286写数据函数
+&nbsp;*&nbsp;参数：data
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">writeData</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span>&nbsp;<span class="hljs-keyword">char</span>&nbsp;data)</span>
+</span>{
+<span class="hljs-comment">//	P2OUT&nbsp;|=&nbsp;BIT0;&nbsp;&nbsp;//CS=1;</span>
+	sendByte(<span class="hljs-number">0xfa</span>);
+	sendByte(data&nbsp;&amp;&nbsp;<span class="hljs-number">0xf0</span>);
+	sendByte((data&nbsp;&lt;&lt;&nbsp;<span class="hljs-number">4</span>)&nbsp;&amp;&nbsp;<span class="hljs-number">0xf0</span>);
+	delay(<span class="hljs-number">2</span>);
+}
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：lcd_init
+&nbsp;*&nbsp;功能：初始化LCD12864函数
+&nbsp;*&nbsp;参数：无
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">lcd_init</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
+</span>{
+	P2DIR&nbsp;|=&nbsp;BIT1&nbsp;+&nbsp;BIT2;&nbsp;<span class="hljs-comment">//SID&nbsp;,&nbsp;SCLK</span>
+	<span class="hljs-comment">/*delay(20000);
+	writeCom(0x30);&nbsp;&nbsp;//设置8位数据接口，基本指令模式
+	delay(50);
+	writeCom(0x0c);&nbsp;&nbsp;//整体显示开,游标关，反白关
+	delay(50);*/</span>
+	writeCom(<span class="hljs-number">0x30</span>);&nbsp;&nbsp;<span class="hljs-comment">//设置8位数据接口，基本指令模式</span>
+	writeCom(<span class="hljs-number">0x20</span>);&nbsp;&nbsp;<span class="hljs-comment">//清DDRAM</span>
+	writeCom(<span class="hljs-number">0x06</span>);&nbsp;&nbsp;<span class="hljs-comment">//游标及显示右移一位</span>
+	writeCom(<span class="hljs-number">0x0c</span>);&nbsp;&nbsp;<span class="hljs-comment">//整体显示开,游标关，反白关</span>
+	writeCom(<span class="hljs-number">0x01</span>);&nbsp;&nbsp;<span class="hljs-comment">//写入空格清屏</span>
+	writeCom(<span class="hljs-number">0x80</span>);&nbsp;&nbsp;<span class="hljs-comment">//设置首次显示位置</span>
+
+}
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：displayOn12864
+&nbsp;*&nbsp;功能：LCD12864显示字符函数
+&nbsp;*&nbsp;参数：*s,&nbsp;addr
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">displayOn12864</span><span class="hljs-params">(<span class="hljs-keyword">char</span>&nbsp;*s,&nbsp;<span class="hljs-keyword">unsigned</span>&nbsp;<span class="hljs-keyword">char</span>&nbsp;addr)</span>
+</span>{
+	writeCom(addr);
+	<span class="hljs-keyword">while</span>(*s&gt;<span class="hljs-number">0</span>)
+	{
+		writeData(*s);
+		s++;
+		delay(<span class="hljs-number">50</span>);
+	}
+}</code></pre> 
+<p></p> 
+<p>51 mcu 写法：</p> 
+<pre class="brush:cpp;toolbar: true; auto-links: false;"><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span>&nbsp;<span class="hljs-meta-string">&lt;reg51.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+&nbsp;*&nbsp;12864.c
+&nbsp;*&nbsp;&nbsp;Created&nbsp;on:&nbsp;2015-3-31
+&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author:&nbsp;bazingagain
+&nbsp;*/</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span>&nbsp;<span class="hljs-meta-string">"12864.h"</span></span>
+
+sbit&nbsp;RW&nbsp;=&nbsp;P1^<span class="hljs-number">0</span>;
+sbit&nbsp;EN&nbsp;=&nbsp;P1^<span class="hljs-number">1</span>;
+&nbsp;
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：delay
+&nbsp;*&nbsp;功能：延时函数，延时时间为100us&nbsp;*&nbsp;x
+&nbsp;*&nbsp;参数：x
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">delay</span><span class="hljs-params">(uint&nbsp;x)</span>
+</span>{
+&nbsp;&nbsp;&nbsp;&nbsp;uint&nbsp;i,j;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;x;j++)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++);
+}
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：sendByte
+&nbsp;*&nbsp;功能：向LCD12864串行发送1BYET数据
+&nbsp;*&nbsp;参数：command
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">sendByte</span><span class="hljs-params">(uchar&nbsp;command)</span>
+</span>{
+&nbsp;&nbsp;&nbsp;&nbsp;uchar&nbsp;i;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">8</span>;i++)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">if</span>((command&lt;&lt;i)&nbsp;&amp;&nbsp;<span class="hljs-number">0x80</span>)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RW&nbsp;=&nbsp;<span class="hljs-number">1</span>;&nbsp;&nbsp;<span class="hljs-comment">//sid=1;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">else</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RW&nbsp;=&nbsp;<span class="hljs-number">0</span>;&nbsp;<span class="hljs-comment">//sid=0;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EN&nbsp;=&nbsp;<span class="hljs-number">0</span>;&nbsp;&nbsp;<span class="hljs-comment">//SCLK=0</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EN&nbsp;=&nbsp;<span class="hljs-number">1</span>;&nbsp;&nbsp;<span class="hljs-comment">//SCLK=1</span>
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：writeCom
+&nbsp;*&nbsp;功能：向LCD1264写指令函数
+&nbsp;*&nbsp;参数：command
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">writeCom</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span>&nbsp;<span class="hljs-keyword">char</span>&nbsp;command)</span>
+</span>{
+	RW&nbsp;=&nbsp;<span class="hljs-number">1</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;sendByte(<span class="hljs-number">0xf8</span>);&nbsp;&nbsp;<span class="hljs-comment">//传送指令</span>
+&nbsp;&nbsp;&nbsp;&nbsp;sendByte(command&nbsp;&amp;&nbsp;<span class="hljs-number">0xf0</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;sendByte((command&nbsp;&lt;&lt;&nbsp;<span class="hljs-number">4</span>)&nbsp;&amp;&nbsp;<span class="hljs-number">0xf0</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;delay(<span class="hljs-number">2</span>);
+}
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：writeData
+&nbsp;*&nbsp;功能：向LCD1286写数据函数
+&nbsp;*&nbsp;参数：data
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">writeData</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span>&nbsp;<span class="hljs-keyword">char</span>&nbsp;ddata)</span>
+</span>{
+&nbsp;&nbsp;&nbsp;&nbsp;RW&nbsp;=&nbsp;<span class="hljs-number">1</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;sendByte(<span class="hljs-number">0xfa</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;sendByte(ddata&nbsp;&amp;&nbsp;<span class="hljs-number">0xf0</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;sendByte((ddata&nbsp;&lt;&lt;&nbsp;<span class="hljs-number">4</span>)&nbsp;&amp;&nbsp;<span class="hljs-number">0xf0</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;delay(<span class="hljs-number">2</span>);
+}
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：lcd_init
+&nbsp;*&nbsp;功能：初始化LCD12864函数
+&nbsp;*&nbsp;参数：无
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">lcd_init</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
+</span>{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment">/*delay(20000);
+&nbsp;&nbsp;&nbsp;&nbsp;writeCom(0x30);&nbsp;&nbsp;//设置8位数据接口，基本指令模式
+&nbsp;&nbsp;&nbsp;&nbsp;delay(50);
+&nbsp;&nbsp;&nbsp;&nbsp;writeCom(0x0c);&nbsp;&nbsp;//整体显示开,游标关，反白关
+&nbsp;&nbsp;&nbsp;&nbsp;delay(50);*/</span>
+&nbsp;&nbsp;&nbsp;&nbsp;writeCom(<span class="hljs-number">0x30</span>);&nbsp;&nbsp;<span class="hljs-comment">//设置8位数据接口，基本指令模式</span>
+&nbsp;&nbsp;&nbsp;&nbsp;writeCom(<span class="hljs-number">0x20</span>);&nbsp;&nbsp;<span class="hljs-comment">//清DDRAM</span>
+&nbsp;&nbsp;&nbsp;&nbsp;writeCom(<span class="hljs-number">0x06</span>);&nbsp;&nbsp;<span class="hljs-comment">//游标及显示右移一位</span>
+&nbsp;&nbsp;&nbsp;&nbsp;writeCom(<span class="hljs-number">0x0c</span>);&nbsp;&nbsp;<span class="hljs-comment">//整体显示开,游标关，反白关</span>
+&nbsp;&nbsp;&nbsp;&nbsp;writeCom(<span class="hljs-number">0x01</span>);&nbsp;&nbsp;<span class="hljs-comment">//写入空格清屏</span>
+&nbsp;&nbsp;&nbsp;&nbsp;writeCom(<span class="hljs-number">0x80</span>);&nbsp;&nbsp;<span class="hljs-comment">//设置首次显示位置</span>
+&nbsp;
+}
+<span class="hljs-comment">/**
+&nbsp;*&nbsp;函数名：displayOn12864
+&nbsp;*&nbsp;功能：LCD12864显示字符函数
+&nbsp;*&nbsp;参数：*s,&nbsp;addr
+&nbsp;*&nbsp;返回值：无
+&nbsp;*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span>&nbsp;<span class="hljs-title">displayOn12864</span><span class="hljs-params">(<span class="hljs-keyword">char</span>&nbsp;*s,&nbsp;<span class="hljs-keyword">unsigned</span>&nbsp;<span class="hljs-keyword">char</span>&nbsp;addr)</span>
+</span>{
+&nbsp;&nbsp;&nbsp;&nbsp;writeCom(addr);
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">while</span>(*s&gt;<span class="hljs-number">0</span>)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;writeData(*s);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s++;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delay(<span class="hljs-number">50</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</code></pre> 
+<p><br></p>
+                                                    <div class="ad-wrap" style="margin-top: 12px;">
+                                                        <div id="blog-title-ad" data-traceid="blog_ali" data-tracepid="blogdown" style="">
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 博客详情页下方 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7090564139599510" data-ad-slot="2321828009"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<!--
+<script>
+    function success_jsonpCallback(data) {
+        var obj = eval(data);
+        if( obj.success ){
+            var contents = eval(obj.data[0].content);
+            if(contents.length > 0){
+                var content = contents[0];
+                $('#blog-title-ad').prepend("<a  href='"+ content.url +"' target='_blank' style='max-width:780px;'><img src='"+content.img+"'/></a>");
+                $('#blog-title-ad').show();
+            }
+            
+        }else {
+            $('#blog-title-ad').hide();
+        }
+    }
+    window.addEventListener("load", function() {
+         var url="  http://clickc.admaster.com.cn/c/a116493,b2949390,c3159,i0,m101,8a1,8b2,h";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            jsonp: "callback",
+            dataType: 'jsonp',
+            jsonpCallback: 'success_jsonpCallback',
+            contentType: "application/json; charset=utf-8",
+            success: function( response ) {
+                // do in callback
+            },
+            error:function(){
+                $('#blog-title-ad').hide();
+            }
+        });
+    }, false);
+</script>
+-->
+                                        </div>
+                                            </div>
+                    <div class="ui hidden divider"></div>
+                    <p style="text-align:center;">
+                                                    © 著作权归作者所有
+                                            </p>
+                </div>
+
+                                <div class="ui basic center aligned segment action">
+                    <div class="ui huge buttons">
+                                                    <a class="ui green button donate" donate="" data-id="300854" data-obj-type="16344358" data-subject="硬件之路-串行LCD12864之MSP430简单实现" data-donater="" data-author="1413857" data-return-url="https://my.oschina.net/xlazhh/blog/300854" data-notify-url="https://my.oschina.net/action/donate/paySuccess">                                 <i class="yen icon"></i>打赏</a>
+                                                <a class="ui basic button like article-like " data-id="300854">
+                            <i class="thumbs up outline icon"></i>点赞 (<span data-article-like-count="">0</span>)
+                        </a>
+                        <a class="ui basic button collect-btn hover" data-id="300854" data-user-id="1413857" data-obj-type="3" data-max="99" data-tag-required="" data-current-user-id="" data-recommend-tags=""><i class="star outline icon"></i>收藏 (<span data-collect-count="" data-id="300854" data-obj-type="3">0</span>)</a>
+                        <div class="ui basic dropdown share button bdsharebuttonbox reset dropdown-share bdshare-button-style0-16" data-tag="share-blog" tabindex="0" data-bd-bind="1559461076527">
+                            <i class="share icon"></i> <span>分享</span>
+                            <div class="menu" tabindex="-1">
+                                <a class="item" data-cmd="tsina"><i class="weibo icon"></i>微博</a>
+                                <a class="item" data-cmd="sqq"><i class="qq icon"></i>QQ</a>
+                                <a class="item" data-cmd="weixin"><i class="weixin icon"></i>微信</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui basic segment">
+                        <a class="ban" style="cursor: pointer" ban-report="" data-id="300854" data-obj-type="3" data-url="https://my.oschina.net/xlazhh/blog/300854">
+                            <i class="flag red icon"></i>举报</a>
+                    </div>
+                </div>
+
+                                
+
+                                <div class="around-articles-wrap">
+                                                            <div class="around-item around-left">
+                        <i class="angle left icon"></i>
+                        <span class="text">上一篇：</span>
+                        <a class="link" href="https://my.oschina.net/xlazhh/blog/309324">Android Failed to allocate memory: 1455</a>
+                    </div>
+                    
+                                                            <div class="around-item around-right">
+                        <span class="text">下一篇：</span>
+                        <a class="link" href="https://my.oschina.net/xlazhh/blog/422400">Fedora21下安装 sqlite3</a>
+                        <i class="angle right icon"></i>
+                    </div>
+                                    </div>
+
+                                <div class="ui info message author-card">
+                    <div class="ui items">
+                        <div class="item author-card-item">
+                            <a class="ui avatar tiny image" href="https://my.oschina.net/xlazhh">
+                                                        <div class="osc-avatar large-portrait _80x80" title="爱吃橙子的小石头" data-user-id="1413857">
+                <img src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/1413857_200.jpg" alt="爱吃橙子的小石头" title="爱吃橙子的小石头">
+            </div>
+                                        </a>
+                            <div class="content author-card-info">
+                                <div class="author-header clearfix">
+                                                                        <h3 class="author-name"><a class="__user" href="https://my.oschina.net/xlazhh">爱吃橙子的小石头</a></h3>
+                                                                                                        </div>
+                                <div class="ui horizontal list">
+                                    <div class="item">粉丝 <span class="followers-count" data-user-id="1413857" data-followers-count="0">0</span></div>
+                                    <div class="item">博文 35</div>
+                                    <div class="item">码字总数 12623</div>
+                                    <div class="item">作品 0</div>
+                                </div>
+                                <div class="ui hidden fitted clearing divider"></div>
+                                                                                                    <div class="ui horizontal list">
+                                                                                    <div class="item"><i class="map marker alternate icon"></i> 沙坪坝</div>
+                                                                                                                            <div class="item"><i class="address card outline icon"></i> 程序员 </div>
+                                                                            </div>
+                                                                                                    <div class="ui hidden fitted clearing divider"></div>
+                                                                                                                    <a class="ui green compact button follow-btn" data-user-id="1413857" data-follow-status="1"><i class="heart outline icon"></i><span class="text">关注</span></a>
+                                                                                                            <a class="ui green basic compact button send-message-btn" data-user-id="1413857" data-user-name="爱吃橙子的小石头"><i class="envelope outline icon"></i>私信</a>
+                                                                        <a class="ui green basic compact button" href="https://www.oschina.net/question/ask?user=1413857" target="_blank"><i class="comment outline icon"></i>提问</a>
+                                                            </div>
+                            <div class="content panel-skills-radar" style="display: none">
+                                <div class="skills-radar">
+                                    <div class="radar-wrap" radar="" data-user-id="1413857" data-skills-num="5" data-detail-url="https://my.oschina.net/xlazhh/radar" data-container=".panel-skills-radar">
+                                        <div class="radar-map"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                                                            </div>
+                        <div class="ui basic segment article-list">
+                <div class="scroll-tab hidden-scroll">
+                    <div class="ui green pointing secondary massive menu spaceBlog-tab">
+                        <a class="active item" data-tab="relArticleList">相关文章</a>
+                        <a class="item" data-tab="newArticleList">最新文章</a>
+                    </div>
+                </div>
+                <div class="ui basic segment active tab article-list" data-tab="relArticleList" id="relArticleList">
+                                          
+
+    <div class="ui very relaxed items list-container blog-detail-list-container">
+                                    <div class="item blog-item">
+                    <div class="content">
+                        <a class="header" href="https://gitee.com/wusiyu/BadApplePi" target="_blank" title="WuSiYu/BadApplePi">WuSiYu/BadApplePi</a>
+                        <div class="description">
+                            <p class="line-clamp">树莓派+Lcd12864播放Badapple 本项目实现在LCD12864显示屏(st7920控制器)上播放黑白动漫影绘视频：Badapple 在树莓派B+和2B上均能达到30fps（原视频帧数） 适用硬件 树莓派(Raspberry Pi)：支...</p>
+                        </div>
+                        <div class="extra">
+                            <div class="ui horizontal list">
+                                <div class="item">WuSiYu</div>
+                                <div class="item">2015/08/26</div>
+
+                                <div class="item"><i class="eye icon"></i> 0</div>
+                                <div class="item"><i class="comment outline icon"></i> 0</div>
+                            </div>
+                        </div>
+                    </div>
+                                                                <div class="images">
+                            <a class="ui small image" href="https://gitee.com/wusiyu/BadApplePi" target="_blank" title="WuSiYu/BadApplePi">
+                                <img src="http://img.oschina.net/itags/601029885afcf18964d4180b18aee61334e4610d.jpg" alt="" data-img-render="" style="width: 100%; height: auto;">
+                            </a>
+                        </div>
+                                    </div>
+                                                <div class="item blog-item">
+                    <div class="content">
+                        <a class="header" href="http://www.jianshu.com/p/8e307c0c384c" target="_blank" title="利用Python做毕业设计，基于python的智能化门禁系统，远程控制！">利用Python做毕业设计，基于python的智能化门禁系统，远程控制！</a>
+                        <div class="description">
+                            <p class="line-clamp">社会发展的很快，人们的生活水平大幅度提高的同时，安全问题也愈受关注。 进小区要刷卡，公司刷卡，进学校宿舍刷卡，各种各样的刷卡安全系统在我们的生活里出现。简称为：门禁系统或出去管理...</p>
+                        </div>
+                        <div class="extra">
+                            <div class="ui horizontal list">
+                                <div class="item">柯西带你学编程</div>
+                                <div class="item">2018/06/07</div>
+
+                                <div class="item"><i class="eye icon"></i> 0</div>
+                                <div class="item"><i class="comment outline icon"></i> 0</div>
+                            </div>
+                        </div>
+                    </div>
+                                                                <div class="images">
+                            <a class="ui small image" href="http://www.jianshu.com/p/8e307c0c384c" target="_blank" title="利用Python做毕业设计，基于python的智能化门禁系统，远程控制！">
+                                <img src="http://img.oschina.net/itags/41389a7ab637387a1543bc0413368f18601ed27e.png" alt="" data-img-render="" style="width: auto; height: 100%;">
+                            </a>
+                        </div>
+                                    </div>
+                                                <div class="item blog-item">
+                    <div class="content">
+                        <a class="header" href="https://my.oschina.net/u/1982421/blog/301605" target="_blank" title="LCD12864 cubie驱动显示">LCD12864 cubie驱动显示</a>
+                        <div class="description">
+                            <p class="line-clamp">操作系统： 使用的是官方网站上的ubuntu sd card 1.1 1. 安装python的库和cubie的gpio库 sudo apt-get install python-dev wget http://dl.linux-sunxi.org/users/tom/pySUNXI-0.1.12.tar.gz......</p>
+                        </div>
+                        <div class="extra">
+                            <div class="ui horizontal list">
+                                <div class="item">cubieboard</div>
+                                <div class="item">2014/08/15</div>
+
+                                <div class="item"><i class="eye icon"></i> 0</div>
+                                <div class="item"><i class="comment outline icon"></i> 0</div>
+                            </div>
+                        </div>
+                    </div>
+                                                        </div>
+                                                <div class="item blog-item">
+                    <div class="content">
+                        <a class="header" href="https://www.oschina.net/question/234345_44441" target="_blank" title="MSP430FG439上实现IO模拟UART以及移植要点解析">MSP430FG439上实现IO模拟UART以及移植要点解析</a>
+                        <div class="description">
+                            <p class="line-clamp">本文来自http://blog.csdn.net/hellogv/ ，引用必须注明出处！ 最近要做MSP430上的开发，一上手就要做IO模拟UART这种难度的玩意，幸好网上已经有很多现成的MSP430的软串口实现例子，本文代码...</p>
+                        </div>
+                        <div class="extra">
+                            <div class="ui horizontal list">
+                                <div class="item">晨曦之光</div>
+                                <div class="item">2012/03/14</div>
+
+                                <div class="item"><i class="eye icon"></i> 241</div>
+                                <div class="item"><i class="comment outline icon"></i> 0</div>
+                            </div>
+                        </div>
+                    </div>
+                                                        </div>
+                                                <div class="item blog-item">
+                    <div class="content">
+                        <a class="header" href="https://my.oschina.net/u/219279/blog/67400" target="_blank" title="SPI （Serial Peripheral Interface）串行外设接口 协议详解+实例">SPI （Serial Peripheral Interface）串行外设接口 协议详解+实例</a>
+                        <div class="description">
+                            <p class="line-clamp">SPI （Serial Peripheral Interface）串行外设接口 协议详解+实例 一、协议简介 SPI协议简介（转） (2008-04-26 16:24) 分类：单片机及硬件相关技术 来自：http://blog.chinaunix.net/space...</p>
+                        </div>
+                        <div class="extra">
+                            <div class="ui horizontal list">
+                                <div class="item">FreeBlues</div>
+                                <div class="item">2012/07/16</div>
+
+                                <div class="item"><i class="eye icon"></i> 0</div>
+                                <div class="item"><i class="comment outline icon"></i> 1</div>
+                            </div>
+                        </div>
+                    </div>
+                                                        </div>
+                        </div>
+    <div class="page-load-status">
+        <p class="infinite-scroll-request">
+            <i class="ui active small inline loader" style="display: none;"></i>
+        </p>
+        <p class="infinite-scroll-last">没有更多内容</p>
+        <p class="infinite-scroll-error">加载失败，请刷新页面</p>
+    </div>
+    <a class="ui fluid button load-more-button">加载更多</a>
+                <p class="pagination" style="display: none;">
+            <a class="rel-pagination pagination__next" style="display: none" href="https://my.oschina.net/xlazhh/blog/widgets/_blog_detail_list_rel?obj=300854&amp;p=2&amp;type=ajax">下一页</a>
+        </p>
+                    </div>
+                <div class="ui basic segment tab article-list" data-tab="newArticleList" id="newArticleList">
+                                          
+
+    <div class="ui very relaxed items list-container blog-detail-list-container">
+                                                        <div class="item blog-item">
+                        <div class="content">
+                            <a class="header" href="https://my.oschina.net/u/2351011/blog/3057388" target="_blank" title="SpringCloudSleuth 链路跟踪">SpringCloudSleuth 链路跟踪</a>
+                            <div class="description">
+                                <p class="line-clamp">SpringCloudSleuth使用的核心组件是Twitter推出的Zipkin监控组件，zipkin就是一个分布式的跟踪系统，用户收集服务的数据 collector 收集器 rabbitmq ... storage 存储器 mysql ... 默认内存 ...</p>
+                            </div>
+                            <div class="extra">
+                                <div class="ui horizontal list">
+                                    <div class="item">少年已不再年少</div>
+                                    <div class="item">今天</div>
+
+                                    <div class="item"><i class="eye icon"></i> 3</div>
+                                    <div class="item"><i class="comment outline icon"></i> 0</div>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                                            <div class="images">
+                                <a class="ui small image" href="https://my.oschina.net/u/2351011/blog/3057388" target="_blank" title="SpringCloudSleuth 链路跟踪">
+                                    <img src="https://oscimg.oschina.net/oscnet/451787f7049879a3207d95ea23b97ae2bfe.jpg" alt="" data-img-render="" style="width: auto; height: 100%;">
+                                </a>
+                            </div>
+                                            </div>
+                                                                                    <div class="item blog-item">
+                        <div class="content">
+                            <a class="header" href="https://my.oschina.net/feistel/blog/3057366" target="_blank" title="Oracle PL/SQL">Oracle PL/SQL</a>
+                            <div class="description">
+                                <p class="line-clamp">PL/SQL -- 输出功能 -- set serveroutput on size 10000 DECLARE -- 标量型变量 v_result NUMBER(8, 2); -- %TYPE会根据表中字段的类型定义变量 v_originName origin.originName%TYPE; v_con......</p>
+                            </div>
+                            <div class="extra">
+                                <div class="ui horizontal list">
+                                    <div class="item">LoSingSang</div>
+                                    <div class="item">今天</div>
+
+                                    <div class="item"><i class="eye icon"></i> 3</div>
+                                    <div class="item"><i class="comment outline icon"></i> 0</div>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                                    </div>
+                                                                                    <div class="item blog-item">
+                        <div class="content">
+                            <a class="header" href="https://my.oschina.net/kalengo/blog/3057355" target="_blank" title="Node.js与RPC 的实践方案-Eggjs使用sofa-rpc-node模块">Node.js与RPC 的实践方案-Eggjs使用sofa-rpc-node模块</a>
+                            <div class="description">
+                                <p class="line-clamp">一、前言 SOFARPC 是蚂蚁金服开源的一个高可扩展性、高性能、生产级的 Java RPC 框架，提供了丰富的模型抽象和可扩展接口，包括过滤器、路由、负载均衡等等，致力于简化应用之间的 RPC 调用，...</p>
+                            </div>
+                            <div class="extra">
+                                <div class="ui horizontal list">
+                                    <div class="item">AI考拉</div>
+                                    <div class="item">今天</div>
+
+                                    <div class="item"><i class="eye icon"></i> 3</div>
+                                    <div class="item"><i class="comment outline icon"></i> 0</div>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                                    </div>
+                                                                                    <div class="item blog-item">
+                        <div class="content">
+                            <a class="header" href="https://my.oschina.net/feiyangqingyun/blog/3057354" target="_blank" title="Qt开发经验总结之武林秘籍">Qt开发经验总结之武林秘籍</a>
+                            <div class="description">
+                                <p class="line-clamp">一、开发经验总结 当编译发现大量错误的时候，从第一个看起，一个一个的解决，不要急着去看下一个错误，往往后面的错误都是由于前面的错误引起的，第一个解决后很可能都解决了。 定时器是个好...</p>
+                            </div>
+                            <div class="extra">
+                                <div class="ui horizontal list">
+                                    <div class="item">飞扬青云</div>
+                                    <div class="item">今天</div>
+
+                                    <div class="item"><i class="eye icon"></i> 3</div>
+                                    <div class="item"><i class="comment outline icon"></i> 0</div>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                                    </div>
+                                                                                    <div class="item blog-item">
+                        <div class="content">
+                            <a class="header" href="https://my.oschina.net/go4it/blog/3057353" target="_blank" title="聊聊Elasticsearch的EsThreadPoolExecutor">聊聊Elasticsearch的EsThreadPoolExecutor</a>
+                            <div class="description">
+                                <p class="line-clamp">序 本文主要研究一下Elasticsearch的EsThreadPoolExecutor EsThreadPoolExecutor elasticsearch-7.0.1/server/src/main/java/org/elasticsearch/common/util/concurrent/EsThreadPoolExecuto......</p>
+                            </div>
+                            <div class="extra">
+                                <div class="ui horizontal list">
+                                    <div class="item">go4it</div>
+                                    <div class="item">今天</div>
+
+                                    <div class="item"><i class="eye icon"></i> 4</div>
+                                    <div class="item"><i class="comment outline icon"></i> 0</div>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                                    </div>
+                                        </div>
+    <div class="page-load-status">
+        <p class="infinite-scroll-request">
+            <i class="ui active small inline loader" style="display: none"></i>
+        </p>
+        <p class="infinite-scroll-last">没有更多内容</p>
+        <p class="infinite-scroll-error">加载失败，请刷新页面</p>
+    </div>
+    <a class="ui fluid button load-more-button">加载更多</a>
+                <p class="pagination">
+            <a class="news-pagination pagination__next" style="display: none" href="https://my.oschina.net/xlazhh/blog/widgets/_blog_detail_list_news?p=2&amp;type=ajax">下一页</a>
+        </p>
+                    </div>
+            </div>
+        </div>
+        <div class="two wide computer only column">
+                        <div class="ad-wrap">
+                                        <div data-traceid="blog_left_1" data-tracepid="blog_left">
+
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ios-zone-home-120x600 -->
+<ins class="adsbygoogle" style="display:inline-block;width:120px;height:600px" data-ad-client="ca-pub-7090564139599510" data-ad-slot="7907495427"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+                        </div>
+                    </div>
+    </div>
+</div>
+
+
+<div class="ui mini delete-blog modal">
+    <div class="header">删除文章</div>
+    <div class="content">
+        <p>文章删除后无法恢复，确定取消删除此文章吗？</p>
+    </div>
+    <div class="actions">
+        <div class="ui cancel button">取消</div>
+        <div class="ui red ok button">确定</div>
+    </div>
+</div>
+<div class="ui mini recommend-self modal">
+    <div class="header">自荐文章</div>
+    <div class="content">
+        <p>亲，自荐的博客将通过私信方式通知管理员，优秀的博客文章审核通过后将在博客推荐列表中显示</p>
+    </div>
+    <div class="actions">
+        <div class="ui cancel button">取消</div>
+        <div class="ui red ok button">确定</div>
+    </div>
+</div>
+<div class="ui mini recommend-blog modal">
+    <div class="header">推荐文章</div>
+    <div class="content">
+        <p>确定推荐此文章吗？</p>
+    </div>
+    <div class="actions">
+        <div class="ui cancel button">取消</div>
+        <div class="ui green ok button">确定</div>
+    </div>
+</div>
+<div class="ui mini recommend-author modal">
+    <div class="header">推荐博主</div>
+    <div class="content">
+        <p>确定推荐此博主吗？</p>
+    </div>
+    <div class="actions">
+        <div class="ui cancel button">取消</div>
+        <div class="ui green ok button">确定</div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/blog" defer="defer"></script>
+<script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/space"></script>
+
+<script>
+    // 百度分享
+    window._bd_share_config = {
+        common : {
+            bdText : '硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA',
+            bdDesc : 'MSP430',
+            bdUrl  : 'https://my.oschina.net/xlazhh/blog/300854',
+            bdPic  : 'http://static.oschina.net/uploads/space/2014/0813/180144_s4QJ_1413857.jpg'
+        },
+        share : [{
+            bdSize : 16
+        }]
+    };
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='https://static.oschina.net/new-osc/js/utils/plugins/bdshare_api/share.js?v='+~(-new Date()/36e5)];
+</script>
+                        <div name="detail_show_footer" data-traceid="detail_show" data-tracepid="detail_show_footer">
+                <style>
+    .detail_banner_ad {
+        display: none;
+        position: fixed;
+        margin: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10001;
+        width: 100%;
+    }
+    .detail_banner_ad_bg {
+        position: relative;
+        height: 73px;
+        width: 800px;
+        margin: 0 auto;
+        background: url("https://oscimg.oschina.net/oscnet/8b36840746ba9bf2c642862537a21cb124f.jpg") no-repeat left bottom;
+        background-size: 800px 73px;
+    }
+    .detail_banner_ad_close {
+        position: absolute;
+        right: 0px;
+        bottom: 35px;
+        width: 30px;
+        height: 30px;
+        margin: auto;
+        background: url("https://oscimg.oschina.net/oscnet/6e950de938e3a23b855cd156e69ede85583.jpg") no-repeat left;
+        background-size: 30px;
+        cursor: pointer;
+    }
+    @media screen and (max-width: 768px) {
+        .detail_banner_ad {
+            /* display: none !important; */
+        }
+        .detail_banner_ad_bg {
+            height: 10vw; /* 75/750:10/100vw */
+            width: 100%;
+            background: url("https://oscimg.oschina.net/oscnet/5fdb3a306c9904ba20d79274c6c370d8c8d.jpg") no-repeat left bottom;
+            background-size: 100%;
+        }
+        .detail_banner_ad_close {
+            /* bottom: 25px!important; */
+            bottom: 6.67vw!important;
+            right: 1px!important;
+            /* width: 16px; */
+            /* height: 16px; */
+            width: 4.267vw;
+            height: 4.267vw;
+            background-size: 100%;
+        }
+    }
+</style>
+<div class="detail_banner_ad" style="display: block;">
+    <a href="https://oschina.gitee.io/6th?utm_source=oschina-dl" target="_blank">
+            <div class="detail_banner_ad_bg"><span class="detail_banner_ad_close"></span></div>
+    </a>
+</div>
+<!-- <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script> -->
+<script src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/js.cookie.min.js"></script>
+<script type="text/javascript">
+    (function () {
+        function loadScript(src, callback) {
+            var script = document.createElement('script'),
+                head = document.getElementsByTagName('head')[0];
+            script.type = 'text/javascript';
+            script.charset = 'UTF-8';
+            script.src = src;
+            if (script.addEventListener) {
+                script.addEventListener('load', function () {
+                    callback();
+                }, false);
+            } else if (script.attachEvent) {
+                script.attachEvent('onreadystatechange', function () {
+                    var target = window.event.srcElement;
+                    if (target.readyState == 'loaded') {
+                        callback();
+                    }
+                });
+            }
+            head.appendChild(script);
+        }
+        function loadAd() {
+            var leftPeople = $('.detail_banner_ad');
+            var cookieName = 'visit-detail-banner-ad-0526-my6th';
+            var isVisit = Cookies.get(cookieName);
+            if (isVisit == 1) {
+                leftPeople.hide();
+            } else {
+                leftPeople.show();
+            }
+            $('.detail_banner_ad_close').on('click', function (e) {
+                e.preventDefault();
+                Cookies.set(cookieName, 1, {expires: 90, path: '/'});
+                leftPeople.slideUp();
+            })
+        };
+        // if (window.innerWidth >= 768) {
+            if (window.jQuery) {
+                loadAd();
+            } else {
+                loadScript('https://www.oschina.net/public/bower_components/jquery/dist/jquery.min.js', function () {
+                    loadAd();
+                });
+            }
+        // }
+    })();
+</script>
+            </div>
+            
+
+            </div>
+        </div>
+
+                <div id="footer" class="ui vertical footer segment mb-hide">
+    <div class="ui container">
+        <div class="ui grid">
+            <div class="eight wide mobile four wide tablet four wide computer column">
+                <h4 class="ui header">OSCHINA 社区</h4>
+                <div class="ui link list">
+                    <a class="item" href="https://www.oschina.net/home/aboutosc" target="_blank">关于我们</a>
+                    <a class="item" href="https://www.oschina.net/home/aboutosc" target="_blank">联系我们</a>
+                    <a class="item" href="https://www.oschina.net/home/aboutosc#partners#" target="_blank">合作伙伴</a>
+                    <a class="item" href="https://www.oschina.net/openapi" target="_blank">Open API</a>
+                </div>
+            </div>
+            <div class="eight wide mobile four wide tablet four wide computer column">
+                <h4 class="ui header">在线工具</h4>
+                <div class="ui link list">
+                    <a class="item" href="https://gitee.com/?from=osc-bottom" target="_blank">码云 Gitee.com</a>
+                    <a class="item" href="https://gitee.com/enterprises?from=osc-bottom" target="_blank">企业研发管理</a>
+                    <a class="item" href="https://copycat.gitee.com/?from=osc-bottom" target="_blank">CopyCat-代码克隆检测</a>
+                    <a class="item" href="https://tool.oschina.net/" target="_blank">实用在线工具</a>
+                </div>
+            </div>
+            <div class="center aligned eight wide mobile two wide tablet two wide computer column">
+                <h4 class="ui header">微信公众号</h4>
+                <img src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/wechat_qrcode.jpg" alt="微信公众号">
+            </div>
+            <div class="center aligned eight wide mobile six wide tablet six wide computer column">
+                <h3 class="ui header">OSCHINA APP</h3>
+                <p>聚合全网技术文章，根据你的阅读喜好进行个性推荐</p>
+                <a href="https://www.oschina.net/app" target="_blank" class="ui large primary button">下载 APP</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="copyright">
+    <div class="ui container">
+        <div class="ui clearing basic segment">
+            <div class="ui left floated horizontal link list">
+                <div class="item">©OSCHINA(OSChina.NET)</div>
+                <div class="item mb-hide">工信部</div>
+                <a class="item mb-hide" href="http://www.copu.org.cn/" target="_blank" title="开源软件推进联盟">开源软件推进联盟</a>
+                <div class="item mb-hide">指定官方社区</div>
+            </div>
+            <div class="ui right floated horizontal link list">
+                <div class="item mb-hide">深圳市奥思网络科技有限公司版权所有</div>
+                <a href="http://beian.miit.gov.cn/" target="_blank" class="item">粤ICP备12009483号-3</a>
+            </div>
+        </div>
+    </div>
+</div>    </div>
+                                                        <div class="back-to-top back-to-top-toggle" style="display: block;">
+        <div class="icon"><img src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/back-to-top.svg" alt="返回顶部"></div>
+        <div class="text">顶部</div>
+    </div>
+
+        <script src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/semantic.min.js"></script>
+    <script src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/jweixin-1.2.0.js"></script>
+                <script type="text/javascript" src="./硬件之路-串行LCD12864之MSP430简单实现 - 极北以南的个人页面 - OSCHINA_files/space.c4e91f56.js"></script>                
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else{
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?a411c4d1664dd70048ee98afe7b28f0b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+                
+<script type="text/javascript">
+    !function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.growingio.com/2.1/gio.js","gio");
+    gio('init','89b266b986554bc7', {});
+    gio('send');
+</script>
+    
+
+<!-- Generated by oschina (init:1[ms],page:566[ms],ip:82.129.29.71) //--></body></html>

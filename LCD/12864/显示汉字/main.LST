@@ -1,0 +1,58 @@
+C51 COMPILER V6.12  MAIN                                                                   07/01/2014 16:36:36 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg51.h>
+   2          #include"lcd12864.h"
+   3          
+   4          unsigned char code CharCode[]="欢迎光临芯河电子xhmcu.taobao.com蓝屏白字5V带字库祝亲购物愉快！";
+   5          							  
+   6          void main()
+   7          {
+   8   1      	unsigned char i;
+   9   1      
+  10   1      	LCD12864_Init();
+  11   1      	while(1)
+  12   1      	{
+  13   2      		LCD12864_SetWindow(0, 0);
+  14   2      		while(CharCode[i]!='\0')
+  15   2      		{
+  16   3      			LCD12864_WriteData(CharCode[i]);
+  17   3      			i++;
+  18   3      			if(i==16)  //第一行满写第三行
+  19   3      			{
+  20   4      				LCD12864_SetWindow(1,0);
+  21   4      			}
+  22   3      
+  23   3      			if(i==32)  //第三行满写第四行
+  24   3      			{
+  25   4      				LCD12864_SetWindow(2,0);
+  26   4      			}
+  27   3      			if(i==48)  //第三行满写第四行
+  28   3      			{
+  29   4      				LCD12864_SetWindow(3,0);
+  30   4      			}
+  31   3      			
+  32   3      		}
+  33   2      		while(1);	
+  34   2      	}	
+  35   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     63    ----
+   CONSTANT SIZE    =     63    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
